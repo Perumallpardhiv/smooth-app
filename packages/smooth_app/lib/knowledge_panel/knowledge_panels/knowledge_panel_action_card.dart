@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:smooth_app/generic_lib/design_constants.dart';
-import 'package:smooth_app/generic_lib/smooth_html_widget.dart';
+import 'package:smooth_app/generic_lib/html/smooth_html_widget.dart';
 import 'package:smooth_app/pages/product/add_nutrition_button.dart';
 import 'package:smooth_app/pages/product/add_ocr_button.dart';
 import 'package:smooth_app/pages/product/add_packaging_button.dart';
@@ -65,7 +65,9 @@ class KnowledgePanelActionCard extends StatelessWidget {
       );
     }
     if (kpAction == KnowledgePanelAction.addNutritionFacts) {
-      return AddNutritionButton(product);
+      if (AddNutritionButton.acceptsNutritionFacts(product)) {
+        return AddNutritionButton(product);
+      }
     }
     Logs.e('unhandled knowledge panel action: $action');
     return null;

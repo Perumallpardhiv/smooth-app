@@ -1,29 +1,44 @@
 import 'dart:async';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:provider/single_child_widget.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:smooth_app/cards/category_cards/svg_cache.dart';
 import 'package:smooth_app/data_models/news_feed/newsfeed_model.dart';
 import 'package:smooth_app/data_models/news_feed/newsfeed_provider.dart';
 import 'package:smooth_app/data_models/preferences/user_preferences.dart';
 import 'package:smooth_app/generic_lib/design_constants.dart';
+import 'package:smooth_app/generic_lib/widgets/smooth_app_logo.dart';
 import 'package:smooth_app/generic_lib/widgets/smooth_card.dart';
+import 'package:smooth_app/helpers/extension_on_text_helper.dart';
 import 'package:smooth_app/helpers/launch_url_helper.dart';
 import 'package:smooth_app/helpers/provider_helper.dart';
-import 'package:smooth_app/helpers/strings_helper.dart';
 import 'package:smooth_app/resources/app_icons.dart';
+import 'package:smooth_app/themes/smooth_theme.dart';
 import 'package:smooth_app/themes/smooth_theme_colors.dart';
 import 'package:smooth_app/themes/theme_provider.dart';
+import 'package:smooth_app/widgets/smooth_text.dart';
 
 class ScanTagLine extends StatelessWidget {
-  const ScanTagLine({super.key});
+  const ScanTagLine({required this.dense, super.key});
+
+  final bool dense;
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<_ScanNewsFeedProvider>(
-      create: (BuildContext context) => _ScanNewsFeedProvider(context),
+    return MultiProvider(
+      providers: <SingleChildWidget>[
+        ChangeNotifierProvider<_ScanNewsFeedProvider>(
+          create: (BuildContext context) => _ScanNewsFeedProvider(context),
+        ),
+        Provider<_ScanTagLineDensity>(
+          create: (_) =>
+              dense ? _ScanTagLineDensity.dense : _ScanTagLineDensity.normal,
+        ),
+      ],
       child: Consumer<_ScanNewsFeedProvider>(
         builder: (
           BuildContext context,
@@ -45,20 +60,27 @@ class ScanTagLine extends StatelessWidget {
   }
 }
 
+enum _ScanTagLineDensity {
+  dense,
+  normal,
+}
+
 class _ScanTagLineLoading extends StatelessWidget {
   const _ScanTagLineLoading();
 
   @override
   Widget build(BuildContext context) {
+    final _ScanTagLineDensity density = context.read<_ScanTagLineDensity>();
+
     return Shimmer.fromColors(
-      baseColor: Theme.of(context)
-          .extension<SmoothColorsThemeExtension>()!
-          .primaryMedium,
+      baseColor: context.extension<SmoothColorsThemeExtension>().primaryMedium,
       highlightColor: Colors.white,
-      child: const SmoothCard(
+      child: SmoothCard(
+        margin: EdgeInsets.zero,
         child: SizedBox(
           width: double.infinity,
-          height: 200.0,
+          height:
+              density == _ScanTagLineDensity.dense ? 200.0 : double.infinity,
         ),
       ),
     );
@@ -77,6 +99,9 @@ class _ScanTagLineContent extends StatefulWidget {
 }
 
 class _ScanTagLineContentState extends State<_ScanTagLineContent> {
+  // Default values seem weird
+  static const Radius radius = Radius.circular(16.0);
+
   Timer? _timer;
   int _index = -1;
 
@@ -104,8 +129,8 @@ class _ScanTagLineContentState extends State<_ScanTagLineContent> {
         Theme.of(context).extension<SmoothColorsThemeExtension>()!;
     final AppNewsItem currentNews = widget.news.elementAt(_index);
 
-    // Default values seem weird
-    const Radius radius = Radius.circular(16.0);
+    final bool dense =
+        context.read<_ScanTagLineDensity>() == _ScanTagLineDensity.dense;
 
     return Column(
       children: <Widget>[
@@ -121,61 +146,86 @@ class _ScanTagLineContentState extends State<_ScanTagLineContent> {
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: VERY_SMALL_SPACE,
-              horizontal: MEDIUM_SPACE,
+            padding: EdgeInsetsDirectional.only(
+              start: dense ? LARGE_SPACE : MEDIUM_SPACE,
+              end: dense ? MEDIUM_SPACE : BALANCED_SPACE,
+              top: VERY_SMALL_SPACE,
+              bottom: VERY_SMALL_SPACE,
             ),
             child: _TagLineContentTitle(
               title: currentNews.title,
               backgroundColor: currentNews.style?.titleBackground,
               indicatorColor: currentNews.style?.titleIndicatorColor,
               titleColor: currentNews.style?.titleTextColor,
+              dense: dense,
             ),
           ),
         ),
-        Expanded(
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              color: currentNews.style?.contentBackgroundColor ??
-                  (!themeProvider.isDarkMode(context)
-                      ? theme.primaryMedium
-                      : theme.primaryDark),
-              borderRadius: const BorderRadiusDirectional.only(
-                bottomStart: radius,
-                bottomEnd: radius,
-              ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: SMALL_SPACE,
-                horizontal: MEDIUM_SPACE,
-              ),
-              child: Column(
-                children: <Widget>[
-                  Expanded(
-                    child: _TagLineContentBody(
-                      message: currentNews.message,
-                      textColor: currentNews.style?.messageTextColor,
-                      image: currentNews.image,
-                    ),
-                  ),
-                  const SizedBox(height: SMALL_SPACE),
-                  Align(
-                    alignment: AlignmentDirectional.bottomEnd,
-                    child: _TagLineContentButton(
-                      link: currentNews.url,
-                      label: currentNews.buttonLabel,
-                      backgroundColor: currentNews.style?.buttonBackground,
-                      foregroundColor: currentNews.style?.buttonTextColor,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
+        _buildCard(currentNews, themeProvider, context, theme, dense),
       ],
     );
+  }
+
+  Widget _buildCard(
+    AppNewsItem currentNews,
+    ThemeProvider themeProvider,
+    BuildContext context,
+    SmoothColorsThemeExtension theme,
+    bool dense,
+  ) {
+    Widget body = _TagLineContentBody(
+      message: currentNews.message,
+      textColor: currentNews.style?.messageTextColor,
+      image: currentNews.image,
+      dense: dense,
+    );
+
+    if (!dense) {
+      body = Expanded(child: body);
+    }
+
+    final Widget card = Material(
+      type: MaterialType.card,
+      color: currentNews.style?.contentBackgroundColor ??
+          (!themeProvider.isDarkMode(context)
+              ? theme.primaryMedium
+              : theme.primaryDark),
+      borderRadius: const BorderRadius.vertical(bottom: radius),
+      child: InkWell(
+        borderRadius: const BorderRadius.vertical(bottom: radius),
+        onTap: () => LaunchUrlHelper.launchURLAndFollowDeepLinks(
+          context,
+          currentNews.url,
+        ),
+        child: Padding(
+          padding: EdgeInsetsDirectional.symmetric(
+            vertical: dense ? 6.0 : SMALL_SPACE,
+            horizontal: MEDIUM_SPACE,
+          ),
+          child: Column(
+            children: <Widget>[
+              body,
+              SizedBox(height: dense ? VERY_SMALL_SPACE : SMALL_SPACE),
+              Align(
+                alignment: AlignmentDirectional.bottomEnd,
+                child: _TagLineContentButton(
+                  label: currentNews.buttonLabel,
+                  backgroundColor: currentNews.style?.buttonBackground,
+                  foregroundColor: currentNews.style?.buttonTextColor,
+                  dense: dense,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+
+    if (dense) {
+      return card;
+    } else {
+      return Expanded(child: card);
+    }
   }
 
   @override
@@ -188,6 +238,7 @@ class _ScanTagLineContentState extends State<_ScanTagLineContent> {
 class _TagLineContentTitle extends StatelessWidget {
   const _TagLineContentTitle({
     required this.title,
+    required this.dense,
     this.backgroundColor,
     this.indicatorColor,
     this.titleColor,
@@ -197,39 +248,42 @@ class _TagLineContentTitle extends StatelessWidget {
   final Color? backgroundColor;
   final Color? indicatorColor;
   final Color? titleColor;
+  final bool dense;
 
   @override
   Widget build(BuildContext context) {
-    final SmoothColorsThemeExtension theme =
-        Theme.of(context).extension<SmoothColorsThemeExtension>()!;
     final AppLocalizations localizations = AppLocalizations.of(context);
 
     return Semantics(
       label: localizations.scan_tagline_news_item_accessibility(title),
       excludeSemantics: true,
       child: ConstrainedBox(
-        constraints: const BoxConstraints(minHeight: 30.0),
+        constraints: BoxConstraints(minHeight: dense ? 28.0 : 30.0),
         child: Row(
           children: <Widget>[
             SizedBox.square(
               dimension: 11.0,
               child: DecoratedBox(
                 decoration: BoxDecoration(
-                  color: indicatorColor ?? theme.secondaryLight,
+                  color: indicatorColor ?? Colors.white,
                   borderRadius: const BorderRadius.all(ROUNDED_RADIUS),
                 ),
               ),
             ),
-            const SizedBox(width: VERY_SMALL_SPACE),
+            const SizedBox(width: BALANCED_SPACE),
             Expanded(
-                child: Text(
-              title,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16.0,
-                color: titleColor ?? Colors.white,
+              child: AutoSizeText(
+                title,
+                maxLines: 1,
+                minFontSize: 8.0,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.0,
+                  color: titleColor ?? Colors.white,
+                ),
               ),
-            ))
+            ),
           ],
         ),
       ),
@@ -240,11 +294,13 @@ class _TagLineContentTitle extends StatelessWidget {
 class _TagLineContentBody extends StatefulWidget {
   const _TagLineContentBody({
     required this.message,
+    required this.dense,
     this.textColor,
     this.image,
   });
 
   final String message;
+  final bool dense;
   final Color? textColor;
   final AppNewsImage? image;
 
@@ -255,49 +311,65 @@ class _TagLineContentBody extends StatefulWidget {
 class _TagLineContentBodyState extends State<_TagLineContentBody> {
   bool _imageError = false;
 
+  static const EdgeInsetsGeometry _contentPadding = EdgeInsetsDirectional.only(
+    top: SMALL_SPACE,
+    bottom: VERY_SMALL_SPACE,
+  );
+
   @override
   Widget build(BuildContext context) {
     final ThemeProvider themeProvider = context.watch<ThemeProvider>();
     final SmoothColorsThemeExtension theme =
         Theme.of(context).extension<SmoothColorsThemeExtension>()!;
 
-    final Widget text = FormattedText(
+    final Widget text = TextWithBoldParts(
       text: widget.message,
+
+      /// We have to force a maxLines
+      maxLines: widget.dense ? 500 : null,
+      overflow: widget.dense ? TextOverflow.ellipsis : null,
       textStyle: TextStyle(
         color: widget.textColor ??
             (!themeProvider.isDarkMode(context)
                 ? theme.primarySemiDark
                 : theme.primaryLight),
+        fontSize: 15.0,
       ),
     );
 
-    if (widget.image == null) {
-      return text;
+    if (widget.image == null || _imageError) {
+      return Padding(
+        padding: _contentPadding,
+        child: text,
+      );
     }
 
     final int imageFlex = ((widget.image!.width ?? 0.2) * 10).toInt();
-    return Row(
-      children: <Widget>[
-        if (!_imageError) ...<Widget>[
-          Expanded(
-            flex: imageFlex,
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                maxHeight: MediaQuery.sizeOf(context).height * 0.06,
-              ),
-              child: AspectRatio(
-                aspectRatio: 1.0,
-                child: _image(),
+    return Padding(
+      padding: _contentPadding,
+      child: Row(
+        children: <Widget>[
+          if (!_imageError) ...<Widget>[
+            Expanded(
+              flex: imageFlex,
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxHeight: MediaQuery.sizeOf(context).height * 0.06,
+                ),
+                child: AspectRatio(
+                  aspectRatio: 1.0,
+                  child: _image(),
+                ),
               ),
             ),
+            SizedBox(width: widget.dense ? SMALL_SPACE : MEDIUM_SPACE),
+          ],
+          Expanded(
+            flex: 10 - imageFlex,
+            child: text,
           ),
-          const SizedBox(width: MEDIUM_SPACE),
         ],
-        Expanded(
-          flex: 10 - imageFlex,
-          child: text,
-        ),
-      ],
+      ),
     );
   }
 
@@ -306,41 +378,56 @@ class _TagLineContentBodyState extends State<_TagLineContentBody> {
       return SvgCache(
         widget.image!.src,
         semanticsLabel: widget.image!.alt,
+        loadingBuilder: (_) => _onLoading(),
+        errorBuilder: (_, __) => _onError(),
       );
     } else {
       return Image.network(
         semanticLabel: widget.image!.alt,
-        errorBuilder: (
-          BuildContext context,
-          Object error,
-          StackTrace? stackTrace,
+        loadingBuilder: (
+          _,
+          Widget child,
+          ImageChunkEvent? loadingProgress,
         ) {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            if (_imageError != true) {
-              setState(() => _imageError = true);
-            }
-          });
+          if (loadingProgress == null) {
+            return _onLoading();
+          }
 
-          return EMPTY_WIDGET;
+          return child;
         },
+        errorBuilder: (_, __, ___) => _onError(),
         widget.image!.src ?? '-',
       );
     }
+  }
+
+  Widget _onLoading() {
+    return const SmoothAnimatedLogo();
+  }
+
+  Widget _onError() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_imageError != true) {
+        setState(() => _imageError = true);
+      }
+    });
+
+    return EMPTY_WIDGET;
   }
 }
 
 class _TagLineContentButton extends StatelessWidget {
   const _TagLineContentButton({
-    required this.link,
+    required this.dense,
     this.label,
     this.backgroundColor,
     this.foregroundColor,
   });
 
-  final String link;
   final String? label;
   final Color? backgroundColor;
   final Color? foregroundColor;
+  final bool dense;
 
   @override
   Widget build(BuildContext context) {
@@ -348,29 +435,47 @@ class _TagLineContentButton extends StatelessWidget {
     final SmoothColorsThemeExtension theme =
         Theme.of(context).extension<SmoothColorsThemeExtension>()!;
 
-    return FilledButton(
-      style: FilledButton.styleFrom(
-        backgroundColor: backgroundColor ?? theme.primaryBlack,
-        foregroundColor: foregroundColor ?? Colors.white,
-        padding: const EdgeInsets.symmetric(
-          vertical: VERY_SMALL_SPACE,
-          horizontal: MEDIUM_SPACE,
-        ),
-        minimumSize: const Size(0, 20.0),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Text(label ?? localizations.tagline_feed_news_button),
-          const SizedBox(width: MEDIUM_SPACE),
-          const Arrow.right(
-            size: 12.0,
+    return Padding(
+      padding: const EdgeInsetsDirectional.only(bottom: SMALL_SPACE),
+      child: Semantics(
+        button: true,
+        label: label ?? localizations.tagline_feed_news_button,
+        excludeSemantics: true,
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.all(ROUNDED_RADIUS),
+            color: backgroundColor ?? theme.primaryBlack,
           ),
-        ],
-      ),
-      onPressed: () => LaunchUrlHelper.launchURLAndFollowDeepLinks(
-        context,
-        link,
+          child: Padding(
+            padding: const EdgeInsetsDirectional.symmetric(
+              vertical: VERY_SMALL_SPACE,
+              horizontal: VERY_LARGE_SPACE,
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsetsDirectional.only(bottom: 1.0),
+                  child: Text(
+                    label ?? localizations.tagline_feed_news_button,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: MEDIUM_SPACE),
+                CircledArrow.right(
+                  type: CircledArrowType.normal,
+                  size: 18.0 * context.textScaler(),
+                  color: backgroundColor ?? theme.primaryBlack,
+                  padding: EdgeInsets.all(4.0 * context.textScaler()),
+                  circleColor: Colors.white,
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
