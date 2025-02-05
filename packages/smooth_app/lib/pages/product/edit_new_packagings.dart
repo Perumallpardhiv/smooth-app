@@ -117,6 +117,7 @@ class _EditNewPackagingsState extends State<EditNewPackagings>
                 setState(() => _removePackagingAt(deleteIndex)),
             helper: _helpers[index],
             categories: upToDateProduct.categories,
+            productType: upToDateProduct.productType,
           ),
         ),
       );
@@ -152,7 +153,7 @@ class _EditNewPackagingsState extends State<EditNewPackagings>
         ),
         child: addPanelButton(
           appLocalizations.edit_packagings_element_add.toUpperCase(),
-          iconData: Icons.add,
+          leadingIcon: const Icon(Icons.add),
           onPressed: () => setState(
             () => _addPackagingToControllers(
               ProductPackaging(),
@@ -175,10 +176,11 @@ class _EditNewPackagingsState extends State<EditNewPackagings>
             context,
             imageField: ImageField.OTHER,
             barcode: barcode,
+            productType: upToDateProduct.productType,
             language: ProductQuery.getLanguage(),
             isLoggedInMandatory: widget.isLoggedInMandatory,
           ),
-          iconData: Icons.add_a_photo,
+          leadingIcon: const Icon(Icons.add_a_photo),
         ),
       ),
     );
@@ -293,7 +295,7 @@ class _EditNewPackagingsState extends State<EditNewPackagings>
 
     AnalyticsHelper.trackProductEdit(
       AnalyticsEditEvents.packagingComponents,
-      barcode,
+      upToDateProduct,
       true,
     );
 
@@ -301,6 +303,7 @@ class _EditNewPackagingsState extends State<EditNewPackagings>
       changedProduct,
       context: context,
       stamp: BackgroundTaskDetailsStamp.structuredPackaging,
+      productType: upToDateProduct.productType,
     );
     return true;
   }

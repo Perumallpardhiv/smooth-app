@@ -55,6 +55,7 @@ class _LoginPageState extends State<LoginPage> with TraceableClientMixin {
         userId: userIdController.text,
         password: passwordController.text,
       ),
+      context.read<UserPreferences>(),
     );
     if (!context.mounted) {
       return;
@@ -167,7 +168,6 @@ class _LoginPageState extends State<LoginPage> with TraceableClientMixin {
                         // Moves focus to the next field
                         textInputAction: TextInputAction.next,
                         autofillHints: const <String>[
-                          AutofillHints.username,
                           AutofillHints.email,
                         ],
                         validator: (String? value) {
@@ -189,6 +189,7 @@ class _LoginPageState extends State<LoginPage> with TraceableClientMixin {
                         textInputType: TextInputType.text,
                         controller: passwordController,
                         hintText: appLocalizations.password,
+                        maxLines: 1,
                         prefixIcon: const Icon(Icons.vpn_key),
                         enabled: !_runningQuery,
                         textInputAction: TextInputAction.send,

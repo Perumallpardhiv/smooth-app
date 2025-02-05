@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_app/data_models/fetched_product.dart';
+import 'package:smooth_app/data_models/preferences/user_preferences.dart';
 import 'package:smooth_app/database/dao_string_list.dart';
 import 'package:smooth_app/database/local_database.dart';
 import 'package:smooth_app/helpers/analytics_helper.dart';
@@ -11,11 +13,16 @@ import 'package:smooth_app/pages/navigator/app_navigator.dart';
 import 'package:smooth_app/pages/product/common/product_dialog_helper.dart';
 import 'package:smooth_app/pages/product/common/product_query_page_helper.dart';
 import 'package:smooth_app/pages/product/common/search_helper.dart';
+import 'package:smooth_app/pages/product/product_type_extensions.dart';
 import 'package:smooth_app/query/keywords_product_query.dart';
 
 /// Search helper dedicated to product search.
 class SearchProductHelper extends SearchHelper {
-  SearchProductHelper();
+  SearchProductHelper() {
+    _productType = UserPreferences.getUserPreferencesSync().latestProductType;
+  }
+
+  late ProductType _productType;
 
   @override
   String get historyKey => DaoStringList.keySearchProductHistory;
@@ -23,6 +30,12 @@ class SearchProductHelper extends SearchHelper {
   @override
   String getHintText(final AppLocalizations appLocalizations) =>
       appLocalizations.search;
+
+  @override
+  Widget? getAdditionalFilter() =>
+      UserPreferences.getUserPreferencesSync().searchProductTypeFilterVisible
+          ? _ProductTypeFilter(this)
+          : null;
 
   @override
   void search(
@@ -71,6 +84,7 @@ class SearchProductHelper extends SearchHelper {
     final FetchedProduct fetchedProduct =
         await productDialogHelper.openBestChoice();
     if (fetchedProduct.status == FetchedProductStatus.ok) {
+      // TODO(monsieurtanuki): add OxF to Matomo data?
       AnalyticsHelper.trackSearch(
         search: value,
         searchCategory: 'barcode',
@@ -95,7 +109,6 @@ class SearchProductHelper extends SearchHelper {
     }
   }
 
-// used to be in now defunct `ChoosePage`
   Future<void> _onSubmittedText(
     final String value,
     final BuildContext context,
@@ -107,10 +120,50 @@ class SearchProductHelper extends SearchHelper {
         widget: await ProductQueryPageHelper.getBestChoiceWidget(
           name: value,
           localDatabase: localDatabase,
-          productQuery: KeywordsProductQuery(value),
+          productQuery: KeywordsProductQuery(
+            value,
+            productType: UserPreferences.getUserPreferencesSync()
+                    .searchProductTypeFilterVisible
+                ? ProductType.food
+                : _productType,
+          ),
           context: context,
           editableAppBarTitle: false,
         ),
+      ),
+    );
+  }
+}
+
+class _ProductTypeFilter extends StatefulWidget {
+  const _ProductTypeFilter(this.searchProductHelper);
+
+  final SearchProductHelper searchProductHelper;
+
+  @override
+  State<_ProductTypeFilter> createState() => _ProductTypeFilterState();
+}
+
+class _ProductTypeFilterState extends State<_ProductTypeFilter> {
+  @override
+  Widget build(BuildContext context) {
+    final AppLocalizations appLocalizations = AppLocalizations.of(context);
+    final List<ButtonSegment<ProductType>> segments =
+        <ButtonSegment<ProductType>>[];
+    for (final ProductType productType in ProductType.values) {
+      segments.add(
+        ButtonSegment<ProductType>(
+          value: productType,
+          label: Text(productType.getLabel(appLocalizations)),
+        ),
+      );
+    }
+    return SegmentedButton<ProductType>(
+      segments: segments,
+      selected: <ProductType>{widget.searchProductHelper._productType},
+      onSelectionChanged: (Set<ProductType> newSelection) => setState(
+        () => UserPreferences.getUserPreferencesSync().latestProductType =
+            widget.searchProductHelper._productType = newSelection.first,
       ),
     );
   }
