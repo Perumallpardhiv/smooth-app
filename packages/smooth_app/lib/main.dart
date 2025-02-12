@@ -13,6 +13,7 @@ import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
+import 'package:rive/rive.dart';
 import 'package:scanner_shared/scanner_shared.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:smooth_app/data_models/continuous_scan_model.dart';
@@ -28,6 +29,7 @@ import 'package:smooth_app/helpers/entry_points_helper.dart';
 import 'package:smooth_app/helpers/global_vars.dart';
 import 'package:smooth_app/helpers/network_config.dart';
 import 'package:smooth_app/helpers/permission_helper.dart';
+import 'package:smooth_app/pages/app_review.dart';
 import 'package:smooth_app/pages/navigator/app_navigator.dart';
 import 'package:smooth_app/pages/onboarding/onboarding_flow_navigator.dart';
 import 'package:smooth_app/query/product_query.dart';
@@ -65,6 +67,8 @@ Future<void> launchSmoothApp({
   required ScannerLabel scannerLabel,
   final bool screenshots = false,
 }) async {
+  unawaited(RiveFile.initialize());
+
   _screenshots = screenshots;
 
   GlobalVars.barcodeScanner = barcodeScanner;
@@ -114,11 +118,7 @@ late UserPreferences _userPreferences;
 late ProductPreferences _productPreferences;
 late LocalDatabase _localDatabase;
 late ThemeProvider _themeProvider;
-late ColorProvider _colorProvider;
-late TextContrastProvider _textContrastProvider;
 final ContinuousScanModel _continuousScanModel = ContinuousScanModel();
-final PermissionListener _permissionListener =
-    PermissionListener(permission: Permission.camera);
 bool _init1done = false;
 
 // Had to split init in 2 methods, for test/screenshots reasons.
@@ -145,14 +145,12 @@ Future<bool> _init1() async {
     daoString: DaoString(_localDatabase),
   );
   ProductQuery.setQueryType(_userPreferences);
-  UserManagementProvider().checkUserLoginValidity();
+  UserManagementProvider().checkUserLoginValidity(_userPreferences);
 
   await AnalyticsHelper.linkPreferences(_userPreferences);
 
   await ProductQuery.initCountry(_userPreferences);
   _themeProvider = ThemeProvider(_userPreferences);
-  _colorProvider = ColorProvider(_userPreferences);
-  _textContrastProvider = TextContrastProvider(_userPreferences);
 
   await CameraHelper.init();
   await ProductQuery.setUuid(_localDatabase);
@@ -211,15 +209,6 @@ class _SmoothAppState extends State<SmoothApp> {
           return EMPTY_WIDGET;
         }
 
-        // The `create` constructor of [ChangeNotifierProvider] takes care of
-        // disposing the value.
-        ChangeNotifierProvider<T> provide<T extends ChangeNotifier>(T value,
-                {bool? lazy}) =>
-            ChangeNotifierProvider<T>(
-              create: (BuildContext context) => value,
-              lazy: lazy,
-            );
-
         if (!_screenshots) {
           // ending FlutterNativeSplash.preserve()
           FlutterNativeSplash.remove();
@@ -227,29 +216,39 @@ class _SmoothAppState extends State<SmoothApp> {
 
         return MultiProvider(
           providers: <SingleChildWidget>[
-            provide<UserPreferences>(_userPreferences),
-            provide<ProductPreferences>(_productPreferences),
-            provide<LocalDatabase>(_localDatabase),
-            provide<ThemeProvider>(_themeProvider),
-            provide<ColorProvider>(_colorProvider),
-            provide<TextContrastProvider>(_textContrastProvider),
-            provide<UserManagementProvider>(_userManagementProvider),
-            provide<ContinuousScanModel>(_continuousScanModel),
-            provide<PermissionListener>(_permissionListener),
-          ],
-          child: ChangeNotifierProvider<AppNewsProvider>(
-            create: (BuildContext context) => AppNewsProvider(
-              context.read<UserPreferences>(),
+            _provide<UserPreferences>(_userPreferences),
+            _provide<ProductPreferences>(_productPreferences),
+            _provide<UserManagementProvider>(_userManagementProvider),
+            _provide<LocalDatabase>(_localDatabase),
+            _lazyProvide<PermissionListener>(
+              (_) => PermissionListener(permission: Permission.camera),
             ),
-            lazy: true,
-            child: AnimationsLoader(
-              child: AppNavigator(
-                observers: <NavigatorObserver>[
-                  SentryNavigatorObserver(),
-                  matomoObserver,
-                ],
-                child: Builder(builder: _buildApp),
-              ),
+            _provide<ThemeProvider>(_themeProvider),
+
+            /// The next two providers are only used with the AMOLED theme
+            _lazyProvide<ColorProvider>(
+              (_) => ColorProvider(_userPreferences),
+            ),
+            _lazyProvide<TextContrastProvider>(
+              (_) => TextContrastProvider(_userPreferences),
+            ),
+            _provide<ContinuousScanModel>(_continuousScanModel),
+
+            /// Only used after the onboarding
+            _lazyProvide<AppNewsProvider>(
+              (_) => AppNewsProvider(_userPreferences),
+            ),
+            _lazyProvide<AppReviewProvider>(
+              (_) => AppReviewProvider(_userPreferences),
+            ),
+          ],
+          child: AnimationsLoader(
+            child: AppNavigator(
+              observers: <NavigatorObserver>[
+                SentryNavigatorObserver(),
+                matomoObserver,
+              ],
+              child: Builder(builder: _buildApp),
             ),
           ),
         );
@@ -257,11 +256,21 @@ class _SmoothAppState extends State<SmoothApp> {
     );
   }
 
+  ChangeNotifierProvider<T> _provide<T extends ChangeNotifier>(T value) =>
+      ChangeNotifierProvider<T>(
+        create: (BuildContext context) => value,
+      );
+
+  ChangeNotifierProvider<T> _lazyProvide<T extends ChangeNotifier>(
+    T Function(BuildContext) valueBuilder,
+  ) =>
+      ChangeNotifierProvider<T>(
+        create: valueBuilder,
+        lazy: true,
+      );
+
   Widget _buildApp(BuildContext context) {
     final ThemeProvider themeProvider = context.watch<ThemeProvider>();
-    final ColorProvider colorProvider = context.watch<ColorProvider>();
-    final TextContrastProvider textContrastProvider =
-        context.watch<TextContrastProvider>();
     final OnboardingPage lastVisitedOnboardingPage =
         _userPreferences.lastVisitedOnboardingPage;
     OnboardingFlowNavigator(_userPreferences);
@@ -284,14 +293,14 @@ class _SmoothAppState extends State<SmoothApp> {
         theme: SmoothTheme.getThemeData(
           Brightness.light,
           themeProvider,
-          colorProvider,
-          textContrastProvider,
+          () => context.watch<ColorProvider>(),
+          () => context.watch<TextContrastProvider>(),
         ),
         darkTheme: SmoothTheme.getThemeData(
           Brightness.dark,
           themeProvider,
-          colorProvider,
-          textContrastProvider,
+          () => context.watch<ColorProvider>(),
+          () => context.watch<TextContrastProvider>(),
         ),
         themeMode: themeProvider.currentThemeMode,
         routerConfig: AppNavigator.of(context).router,
@@ -301,7 +310,7 @@ class _SmoothAppState extends State<SmoothApp> {
 
   Widget _buildError(AsyncSnapshot<void> snapshot) {
     return MaterialApp(
-      theme: ThemeData(useMaterial3: false),
+      theme: ThemeData(),
       home: SmoothScaffold(
         body: Center(
           child: Text(
