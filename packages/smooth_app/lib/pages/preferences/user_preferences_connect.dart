@@ -5,11 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:smooth_app/data_models/preferences/user_preferences.dart';
 import 'package:smooth_app/generic_lib/design_constants.dart';
 import 'package:smooth_app/generic_lib/dialogs/smooth_alert_dialog.dart';
 import 'package:smooth_app/helpers/app_helper.dart';
@@ -24,16 +22,11 @@ import 'package:smooth_app/services/smooth_services.dart';
 /// Display of "Connect" for the preferences page.
 class UserPreferencesConnect extends AbstractUserPreferences {
   UserPreferencesConnect({
-    required final BuildContext context,
-    required final UserPreferences userPreferences,
-    required final AppLocalizations appLocalizations,
-    required final ThemeData themeData,
-  }) : super(
-          context: context,
-          userPreferences: userPreferences,
-          appLocalizations: appLocalizations,
-          themeData: themeData,
-        );
+    required super.context,
+    required super.userPreferences,
+    required super.appLocalizations,
+    required super.themeData,
+  });
 
   @override
   PreferencePageType getPreferencePageType() => PreferencePageType.CONNECT;
@@ -96,6 +89,15 @@ class UserPreferencesConnect extends AbstractUserPreferences {
         ),
         _getDivider(),
         _getListTile(
+          title: appLocalizations.tiktok,
+          url: appLocalizations.tiktok_link,
+          leadingWidget: SvgPicture.asset(
+            'assets/preferences/tiktok-logo.svg',
+            width: DEFAULT_ICON_SIZE,
+            package: AppHelper.APP_PACKAGE,
+          ),
+        ),
+        _getListTile(
           title: appLocalizations.instagram,
           url: appLocalizations.instagram_link,
           leadingWidget: SvgPicture.asset(
@@ -114,6 +116,24 @@ class UserPreferencesConnect extends AbstractUserPreferences {
               Theme.of(context).colorScheme.onSurface,
               ui.BlendMode.srcIn,
             ),
+            package: AppHelper.APP_PACKAGE,
+          ),
+        ),
+        _getListTile(
+          title: appLocalizations.mastodon,
+          url: appLocalizations.mastodon_link,
+          leadingWidget: SvgPicture.asset(
+            'assets/preferences/mastodon-logo.svg',
+            width: DEFAULT_ICON_SIZE,
+            package: AppHelper.APP_PACKAGE,
+          ),
+        ),
+        _getListTile(
+          title: appLocalizations.bsky,
+          url: appLocalizations.bsky_link,
+          leadingWidget: SvgPicture.asset(
+            'assets/preferences/bluesky-logo.svg',
+            width: DEFAULT_ICON_SIZE,
             package: AppHelper.APP_PACKAGE,
           ),
         ),

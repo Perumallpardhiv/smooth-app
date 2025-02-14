@@ -28,6 +28,14 @@
     "@next_label": {
         "description": "A label on a button that says 'Next', pressing the button takes the user to the next screen."
     },
+    "continue_label": "Продължи",
+    "@continue_label": {
+        "description": "A label on a button that says 'Continue', pressing the button takes the user to the next screen."
+    },
+    "exit_label": "Изход",
+    "@exit_label": {
+        "description": "A label on a button that says 'Exit', pressing the button takes the user to the next screen."
+    },
     "previous_label": "Предишна",
     "@previous_label": {
         "description": "A label on a button that says 'Previous', pressing the button takes the user to the previous screen."
@@ -276,7 +284,6 @@
     "sign_up_page_email_already_exists": "вече съществува, влез в акаунта или опитай с друг имейл.",
     "sign_up_page_provide_valid_email": "Моля, посочи валиден имейл адрес.",
     "sign_up_page_server_busy": "Много съжаляваме, но имаме някои технически затруднения при създаването на твоя акаунт. Моля, опитай отново по-късно.",
-    "@Settings": {},
     "settingsTitle": "Настройки",
     "@settingsTitle": {
         "description": "The title of the Settings page"
@@ -355,6 +362,8 @@
     "@contribute_develop_text_2": {},
     "contribute_develop_dev_mode_title": "Режим на разработчик?",
     "contribute_develop_dev_mode_subtitle": "Включи режим на разработчик",
+    "contribute_donate_title": "Дари",
+    "@contribute_donate_title": {},
     "contribute_donate_header": "Donate to Open Food Facts",
     "@contribute_donate_header": {},
     "contribute_enroll_alpha": "Enroll in internal alpha version",
@@ -384,7 +393,7 @@
     "contribute_translate_text_2": "Преводите са една от ключовите задачи на проекта",
     "@contribute_translate_text_2": {},
     "contribute_join_skill_pool": "Contribute your skills to Open Food Facts. Join the skill pool!",
-    "contribute_share_header": "Share Open Food Facts with your friends",
+    "contribute_share_header": "Сподели Open Food Facts с приятелите си",
     "@contribute_share_header": {},
     "contribute_share_content": "I wanted to let you know about the app I've been using, Open Food Facts, which allows you to get the health and environmental impacts of your food, in a personalized way. It works by scanning the barcodes on the packaging. Finally it's free, does not require registration, and you can even help increase the number of products decyphered. Here's the link to get it for your phone: https://openfoodfacts.app",
     "@contribute_share_content": {
@@ -406,9 +415,9 @@
     "@saving_answer": {
         "description": "Dialog shown to users after they have answered a question, while the answer is being saved in the BE."
     },
-    "contribute_to_get_rewards": "Помогни за подобряването на прозрачността на храните и получи награди",
+    "contribute_to_get_rewards": "Стани участник в прозрачността на храните",
     "@contribute_to_get_rewards": {
-        "description": "Button description shown on a product, clicking the button opens a card with unanswered product questions, users can answer these to contribute to Open Food Facts and gain rewards."
+        "description": "Button description shown on a product, clicking the button opens a card with unanswered product questions, users can answer these to contribute to Open Food Facts."
     },
     "question_sign_in_text": "Влез в акаунта си в Open Food Facts, за да запишеш своите приноси",
     "question_yes_button_accessibility_value": "Answer with yes",
@@ -431,7 +440,7 @@
     "myPreferences_profile_title": "Профил",
     "myPreferences_profile_subtitle": "Manage your Open Food Facts contributor account.",
     "myPreferences_settings_title": "Настройки",
-    "myPreferences_settings_subtitle": "Тъмен режим, Статистики…",
+    "myPreferences_settings_subtitle": "Dark mode, Languages…",
     "myPreferences_food_title": "Хранителни предпочитания",
     "myPreferences_food_subtitle": "Избери каква информация за храната е най-важна за теб.",
     "myPreferences_food_comment": "Choose what information about food matters most to you, in order to rank food according to your preferences, see the information you care about first, and get a compatibility summary. Those food preferences stay on your device, and are not associated with your Open Food Facts contributor account if you have one.",
@@ -497,6 +506,10 @@
     "@search": {
         "description": "Hint text of a search text input field"
     },
+    "search_store": "Search for a store",
+    "@search_store": {
+        "description": "Hint text of a search store text input field"
+    },
     "tap_for_more": "Докосни, за повече информация…",
     "@Product": {},
     "product": "Продукт",
@@ -509,14 +522,29 @@
     "@label_refresh": {
         "description": "Refresh the cached product"
     },
+    "label_reload": "Reload",
+    "@label_reload": {
+        "description": "Reload a page"
+    },
     "image": "Снимка",
     "front_photo": "Снимка отпред",
     "@front_photo": {
         "description": "Button label: For adding a picture of the front of a product"
     },
+    "outdated_image_accessibility_label": "{imageType} (this image may be outdated)",
+    "@outdated_image_accessibility_label": {
+        "description": "Accessibility label for images that are outdated (image type may be front/ingredients/nutrition…)",
+        "placeholders": {
+            "imageType": {}
+        }
+    },
+    "outdated_image_short_label": "may be outdated",
+    "@outdated_image_short_label": {
+        "description": "A label for outdated images"
+    },
     "ingredients": "Съставки",
     "@ingredients": {},
-    "ingredients_editing_instructions": "Запази оригиналната подредба. Посочи процента, когато е посочен. Раздели със запетая или тире, използвай скоби за съставките на съставка и посочи алергените между долни тирета.",
+    "ingredients_editing_instructions": "Keep the original order. Indicate the percentage when specified. Separate with a comma or hyphen and use parentheses for ingredients of an ingredient.",
     "ingredients_editing_error": "Неуспешно запазване на съставките.",
     "ingredients_editing_image_error": "Неуспешно получаване на новата снимка на съставките.",
     "ingredients_editing_title": "Редактиране на съставките",
@@ -534,6 +562,10 @@
     "@nutrition_facts_photo": {
         "description": "Button label: For adding a picture of the nutrition facts of a product"
     },
+    "nutrition_facts_editing_title": "Edit Nutrition Facts",
+    "@nutrition_facts_editing_title": {
+        "description": "Title of the button where users can edit the nutrition facts of a product"
+    },
     "packaging_information": "Информация на опаковката",
     "@packaging_information": {
         "description": "Button label: For adding a picture of the packaging of a product"
@@ -550,10 +582,15 @@
     "@add_product_information_button_label": {},
     "new_product": "Нов продукт",
     "@new_product": {},
-    "new_product_dialog_title": "Току-що намери нов продукт!",
-    "@new_product_dialog_title": {
-        "description": "Please keep it short, like 50 characters. Title of the dialog when the user searched for an unknown barcode."
+    "new_product_found_title": "New product found!",
+    "@new_product_found_title": {
+        "description": "Title of a dialog that informs the user that a barcode doesn't exist in the database"
     },
+    "new_product_found_text": "Our collaborative database contains more than **3 million products**, but this barcode doesn't exist: ",
+    "@new_product_found_text": {
+        "description": "Please keep the ** syntax to make the text bold"
+    },
+    "new_product_found_button": "Добави продукта",
     "new_product_leave_title": "Напускане на страницата?",
     "@new_product_leave_title": {
         "description": "Alert dialog title when a user landed on the 'add new product' page, didn't input anything and tried to leave the page."
@@ -562,13 +599,13 @@
     "@new_product_leave_message": {
         "description": "Alert dialog message when a user landed on the 'add new product' page, didn't input anything and tried to leave the page."
     },
-    "new_product_dialog_description": "Моля, направи снимки на опаковката, за да добавиш този продукт към нашата обща база данни",
+    "new_product_dialog_description": "Please take photos of the packaging to add this product to our common database",
     "@new_product_dialog_description": {
         "description": "Please keep it short, like less than 100 characters. Explanatory text of the dialog when the user searched for an unknown barcode."
     },
-    "new_product_dialog_illustration_description": "An illustration with unknown Nutri-Score and Eco-Score",
+    "new_product_dialog_illustration_description": "An illustration with unknown Nutri-Score and Green Score",
     "@new_product_dialog_illustration_description": {
-        "description": "A description for accessibility of two images side by side: a Nutri-Score and an EcoScore."
+        "description": "A description for accessibility of two images side by side: a Nutri-Score and an Green Score."
     },
     "front_packaging_photo_button_label": "Снимка на продукта отпред",
     "@front_packaging_photo_button_label": {},
@@ -597,6 +634,10 @@
     "crop_page_action_local_failed_message": "We are unable to process the image locally, before sending it to our server. Please try again later or contact-us if the issue persists.",
     "@crop_page_action_local_message": {
         "description": "The save of the picture locally failed - error dialog message"
+    },
+    "crop_page_action_retake": "Retake a photo",
+    "@crop_page_action_retake": {
+        "description": "Button which allows users to retake a photo."
     },
     "crop_page_too_small_image_title": "Снимката е прекалено малка!",
     "@crop_page_too_small_image_title": {
@@ -644,9 +685,9 @@
     "categories_added": "Categories added",
     "new_product_title_nutriscore": "Изчисли Nutri-Score",
     "new_product_subtitle_nutriscore": "Помогни ни, като попълниш поне категория и хранителни стойности",
-    "new_product_title_ecoscore": "Изчисли Eco-Score",
-    "new_product_subtitle_ecoscore": "Get it by filling at least a category",
-    "new_product_additional_ecoscore": "Направи изчисляването на Eco-Score по-прецизно с произход, опаковка и други",
+    "new_product_title_environmental_score": "Compute the Green Score",
+    "new_product_subtitle_environmental_score": "Get it by filling at least a category",
+    "new_product_additional_environmental_score": "Make Green Score computation more precise with origins, packaging & more",
     "new_product_title_nova": "Изчисли нивото на обработка на храната (NOVA)",
     "new_product_subtitle_nova": "Get it by filling the food category and ingredients",
     "new_product_desc_nova_unknown": "Нивото на обработка на храни не е известно",
@@ -668,7 +709,10 @@
     "@new_product_done_button_label": {
         "description": "Button at the end of new product page, that takes you to completed product"
     },
-    "hey_incomplete_product_message": "Tap to answer 3 questions NOW to compute Nutri-Score, Eco-Score & Ultra-processing (NOVA)!",
+    "hey_incomplete_product_message": "Tap to answer 3 questions NOW to compute Nutri-Score, Green Score & Ultra-processing (NOVA)!",
+    "hey_incomplete_product_message_beauty": "Tap now to answer 2 questions to help analyze this cosmetic!",
+    "hey_incomplete_product_message_pet_food": "Tap now to answer 3 questions to help analyze this pet food product!",
+    "hey_incomplete_product_message_product": "Tap now to help complete this product!",
     "nutritional_facts_photo_uploaded": "Снимката с хранителните стойности е качена",
     "@nutritional_facts_photo_uploaded": {},
     "recycling_photo_button_label": "Снимка с информацията за рециклиране",
@@ -724,16 +768,42 @@
     "score_add_missing_product_labels": "Добави липсващите етикети",
     "score_add_missing_product_origins": "Добавете липсващ произход на продукта",
     "score_add_missing_product_stores": "Добавяне на липсващите магазини за продукта",
+    "score_add_missing_product_brands": "Add missing product brands",
     "score_update_nutrition_facts": "Актуализирай хранителните стойности",
     "nutrition_page_title": "Хранителни стойности",
-    "nutrition_page_unspecified": "Хранителните стойности не са посочени върху продукта",
+    "nutrition_page_nutritional_info_title": "Nutritional information",
+    "nutrition_page_nutritional_info_label": "Values specified on the product:",
+    "nutrition_page_nutritional_info_value_positive": "Да",
+    "nutrition_page_nutritional_info_value_negative": "Не",
+    "nutrition_page_nutritional_info_open_photo": "Open photo",
+    "nutrition_page_nutritional_info_explanation": "TODO",
+    "@nutrition_page_nutritional_info_explanation": {
+        "description": "DO NOT TRANSLATE Text to explain when we should set the toggle to off (no nutrition facts)"
+    },
+    "nutrition_page_serving_type_label": "Nutritional values:",
+    "@nutrition_page_serving_type_label": {
+        "description": "Label to let the user choose between per 100g or per serving"
+    },
     "nutrition_page_per_100g": "на 100 г",
     "nutrition_page_per_serving": "на порция",
     "nutrition_page_add_nutrient": "Добави хранително вещество",
     "nutrition_page_serving_size": "Размер на порция",
+    "nutrition_page_serving_size_hint": "Input a serving size (eg: 100g)",
+    "nutrition_page_serving_size_explanation": "TODO",
+    "@nutrition_page_serving_size_explanation": {
+        "description": "DO NOT TRANSLATE Text to explain what to input in the serving size"
+    },
     "nutrition_page_invalid_number": "Невалидно число",
     "nutrition_page_update_running": "Актуализиране на продукта на сървъра…",
     "nutrition_page_update_done": "Продуктът е актуализиран!",
+    "nutrition_page_take_serving_size_from_product_quantity": "Use the product quantity as serving size",
+    "@nutrition_page_take_serving_size_from_product_quantity": {
+        "description": "Button label: Use the product quantity as serving size (nutrition page)"
+    },
+    "nutrition_page_photo_error": "Unable to load the photo",
+    "@nutrition_page_photo_error": {
+        "description": "Error message when the nutrition facts photo can't be loaded"
+    },
     "more_photos": "Още интересни снимки",
     "@more_photos": {},
     "view_more_photo_button": "Виж всички съществуващи снимки за този продукт",
@@ -768,16 +838,82 @@
             }
         }
     },
-    "homepage_main_card_logo_description": "Welcome to Open Food Facts",
+    "product_image_outdated": "This image may be outdated",
+    "product_image_outdated_explanations_title": "This image may be outdated",
+    "product_image_outdated_explanations_content": "This image was taken more than a year ago.\n**Please check that's it's still up-to-date**.\n\nThis is **just a warning**. If the content is still the same, you can ignore this message.",
+    "@product_image_outdated_explanations_content": {
+        "description": "Please keep the ** syntax to make the text bold"
+    },
+    "product_image_action_replace_photo": "Replace photo ({type})",
+    "@product_image_action_replace_photo": {
+        "description": "Action on the photo gallery to replace an existing picture",
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "description": "The type of the photo (eg: ingredients)"
+            }
+        }
+    },
+    "product_image_action_add_photo": "Add a photo ({type})",
+    "@product_image_action_add_photo": {
+        "description": "Action on the photo gallery to add a photo (eg: ingredients)",
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "description": "The type of the photo (eg: ingredients)"
+            }
+        }
+    },
+    "product_image_action_take_new_picture": "Ново заснемане",
+    "@product_image_action_take_new_picture": {
+        "description": "Replace the existing picture with a new one"
+    },
+    "product_image_action_take_picture": "Направи снимка",
+    "@product_image_action_take_picture": {
+        "description": "Take a picture (eg: for ingredients) when there is no one"
+    },
+    "product_image_action_from_gallery": "Select from your phone's gallery",
+    "@product_image_action_from_gallery": {
+        "description": "Replace the existing picture with one from the device's gallery"
+    },
+    "product_image_action_choose_existing_photo": "Select from the product photos",
+    "@product_image_action_choose_existing_photo": {
+        "description": "Replace the existing picture with one from the product's photos"
+    },
+    "product_image_details_label": "Information about the photo",
+    "@product_image_details_label": {
+        "description": "Label for the photo details"
+    },
+    "product_image_details_from_producer": "From the producer",
+    "@product_image_details_from_producer": {
+        "description": "Text to indicate that the image was taken by the producer"
+    },
+    "product_image_details_contributor": "Сътрудник",
+    "@product_image_details_contributor": {
+        "description": "The name of the contributor who uploaded the image"
+    },
+    "product_image_details_contributor_producer": "Contributor (producer)",
+    "@product_image_details_contributor_producer": {
+        "description": "The name of the contributor (and also the owner field) who uploaded the image"
+    },
+    "product_image_details_date": "Дата",
+    "@product_image_details_date": {
+        "description": "Text to indicate the date of the image"
+    },
+    "product_image_details_date_unknown": "Неизвестно",
+    "@product_image_details_date_unknown": {
+        "description": "Text to indicate the date of the image is unknown"
+    },
+    "homepage_main_card_logo_description": "Добре дошъл в Open Food Facts",
     "@homepage_main_card_logo_description": {
         "description": "Description for accessibility of the Open Food Facts logo on the homepage"
     },
-    "homepage_main_card_subheading": "**Scan** a barcode or\n**search** for a product",
+    "homepage_main_card_subheading": "**Сканирай** баркод или\n**потърси** продукт",
     "@homepage_main_card_subheading": {
         "description": "Text between asterisks (eg: **My Text**) means text in bold. Please keep it."
     },
-    "homepage_main_card_search_field_hint": "Search for a product",
-    "homepage_main_card_search_field_tooltip": "Start search",
+    "homepage_main_card_search_field_hint": "Търсене на продукт",
+    "homepage_main_card_search_field_tooltip": "Започни търсене",
     "@homepage_main_card_search_field_tooltip": {
         "description": "Description for accessibility of the search field on the homepage"
     },
@@ -794,7 +930,7 @@
     "tagline_app_review_button_positive": "Обичам го! 😍",
     "tagline_app_review_button_negative": "Не особено…",
     "tagline_app_review_button_later": "Попитай по-късно",
-    "tagline_feed_news_button": "Know more",
+    "tagline_feed_news_button": "Научи повече",
     "app_review_negative_modal_title": "Не харесваш приложението?",
     "app_review_negative_modal_text": "Could you take a few seconds to tell us why?",
     "app_review_negative_modal_positive_button": "Yes, absolutely!",
@@ -813,17 +949,53 @@
             }
         }
     },
+    "product_tags_title": "Product properties",
+    "@product_tags_title": {
+        "description": "The title for showing product properties, aka folksonomy data"
+    },
+    "no_product_tags_found_message": "No product properties found. Properties can be used to describe products in more details, in a flexible way. Tap to add.",
+    "@no_product_tags_found_message": {
+        "description": "Message to show if there are no product properties found"
+    },
+    "add_tag": "Add property",
+    "add_tags": "Add properties",
+    "add_edit_tags": "Add or edit properties",
+    "edit_tag": "Edit property",
+    "remove_tag": "Remove property",
+    "tag_key": "Property",
+    "tag_key_uneditable": "Property (uneditable)",
+    "tag_key_input_hint": "Input a property",
+    "tag_value": "Стойност",
+    "tag_value_input_hint": "Input a value",
+    "tag_key_item": "Property:",
+    "tag_value_item": "Value:",
+    "tag_key_explanations": "A key must be lowercase and without any spaces.",
+    "tag_key_already_exists": "A tag with a property {property} already exists!",
+    "@tag_key_already_exists": {
+        "placeholders": {
+            "property": {
+                "type": "String",
+                "description": "The property name"
+            }
+        }
+    },
     "product_internet_error": "Невъзможно е да се извлече информация за този продукт поради грешка в мрежата.",
     "cached_results_from": "Кеширани резултати от:",
     "@cached_results_from": {
         "description": "Cached results from: x time ago (time ago should not be added to the string)"
     },
     "@Product Addition": {},
-    "added_product_thanks": "Благодарим, че добави този продукт!",
-    "@added_product_thanks": {},
     "product_search_same_category": "Сравни с категорията",
     "@product_search_same_category": {
         "description": "Button looking for the other products within the same category. Less than 30 characters"
+    },
+    "product_search_same_category_short": "Сравни",
+    "@product_search_same_category_short": {
+        "description": "Button looking for the other products within the same category. Just the verb compare"
+    },
+    "product_search_same_category_error": "This feature can only be used for products with a category.\n\nPlease edit the product to add a category.",
+    "@product_search_same_category_error": {
+        "description": "Button looking for the other products within the same category. Just the verb compare"
     },
     "product_improvement_add_category": "Добави категория, за да изчислиш Nutri-Score.",
     "@product_improvement_add_category": {
@@ -845,7 +1017,7 @@
     "@product_improvement_obsolete_nutrition_image": {
         "description": "Message for ProductImprovement.OBSOLETE_NUTRITION_IMAGE"
     },
-    "product_improvement_origins_to_be_completed": "Eco-Score взема предвид произхода на съставките. Моля, направи снимка на съставките и/или всякакви географски обозначения или редактирай продукта, за да могат да бъдат взети предвид.",
+    "product_improvement_origins_to_be_completed": "The Green Score takes into account the origins of the ingredients. Please take a photo of the ingredient list and/or any geographic claim or edit the product, so they can be taken into account.",
     "@product_improvement_origins_to_be_completed": {
         "description": "Message for ProductImprovement.ORIGINS_TO_BE_COMPLETED"
     },
@@ -853,7 +1025,7 @@
     "@country_chooser_label": {
         "description": "Label shown above a selector where the user can select their country (in the preferences)"
     },
-    "currency_chooser_label": "Please choose a currency",
+    "currency_chooser_label": "Моля, избери валута",
     "@currency_chooser_label": {
         "description": "Label shown above a selector where the user can select their currency (in the preferences)"
     },
@@ -974,9 +1146,28 @@
             "count": {}
         }
     },
-    "compare_products_mode": "Сравни продукти",
+    "multiselect_title": "{count,plural, =0{No selected product} =1{One selected product} other{{count} selected products}}",
+    "@multiselect_title": {
+        "description": "Page title with the number of selected items",
+        "placeholders": {
+            "count": {}
+        }
+    },
+    "compare_products_mode": "Compare selected products",
     "@compare_products_mode": {
         "description": "Button to switch to 'compare products mode'"
+    },
+    "delete_products_mode": "Delete selected products",
+    "@delete_products_mode": {
+        "description": "Button to switch to 'delete products'"
+    },
+    "select_all_products_mode": "Select all products",
+    "@select_all_products_mode": {
+        "description": "Button to switch to 'select all products'"
+    },
+    "select_none_products_mode": "Select none",
+    "@select_none_products_mode": {
+        "description": "Button to switch to 'select no products'"
     },
     "compare_products_appbar_title": "Сравни продукти",
     "@compare_products_appbar_title": {
@@ -999,18 +1190,6 @@
     "hint_knowledge_panel_message": "Можеш да докоснеш всяка част от картата, за да получиш повече подробности за това, което виждаш. Опитай сега!",
     "@hint_knowledge_panel_message": {
         "description": "Hint popup indicating the card is clickable during onboarding"
-    },
-    "consent_analytics_title": "Анонимно споделяне на статистики",
-    "@consent_analytics_title": {
-        "description": "Title for the consent analytics UI Page"
-    },
-    "consent_analytics_body1": "Help the Open Food Facts volunteers to improve the app. You decide whether to submit anonymous analytics.",
-    "@conset_analytics_body1": {
-        "description": "first paragraph for the consent analytics UI Page"
-    },
-    "consent_analytics_body2": "Ако промениш решението си, тази опция може да бъде активирана и деактивирана по всяко време от настройките.",
-    "@consent_analytics_body2": {
-        "description": "second paragraph for the consent analytics UI Page"
     },
     "permissions_page_title": "Достъп до камерата",
     "@permissions_page_title": {
@@ -1128,10 +1307,6 @@
     "onboarding_welcome_loading_dialog_title": "Зареждане на първия ти примерен продукт",
     "@onboarding_welcome_loading_dialog_title": {
         "description": "Title for the onboarding loading dialog"
-    },
-    "onboarding_welcome_loading_error": "Изглежда, че няма примерен продукт на твоя език",
-    "@onboarding_welcome_loading_error": {
-        "description": "Seems like there is no example product in your language"
     },
     "product_list_your_ranking": "Твоето класиране",
     "@product_list_your_ranking": {
@@ -1251,7 +1426,7 @@
     "@crash_reporting_toggle_title": {
         "description": "Title for the Crash reporting toggle"
     },
-    "crash_reporting_toggle_subtitle": "When enabled, crash reports are automatically submitted to Open Food Facts' error tracking system, so that bugs can be fixed and thus improve the app.",
+    "crash_reporting_toggle_subtitle": "Когато е активирано, докладите за сривове се изпращат автоматично до системата за проследяване на грешки на Open Food Facts, така че те да бъдат коригирани и да се подобри приложението.",
     "@crash_reporting_toggle_subtitle": {
         "description": "SubTitle for the Crash reporting toggle"
     },
@@ -1297,22 +1472,70 @@
     "@permission_photo_denied": {
         "description": "When the camera/photo permission is denied by user"
     },
+    "show_product_pictures": "Show product pictures",
+    "@show_product_pictures": {
+        "description": "Button to show a list of product pictures"
+    },
     "edit_product_label": "Редактирай продукта",
     "@edit_product_label": {
         "description": "Edit product button label"
     },
-    "edit_product_form_item_add_action": "Add a new {itemType}",
-    "description": "Tooltip to show when the user long presses the (+) button",
-    "@edit_product_form_item_add_action": {
+    "edit_product_pending_operations_banner_title": "Uploading your edits…",
+    "@edit_product_pending_operations_banner_title": {
+        "description": "When a product has pending edits (being sent to the server), there is a message on the edit page (here is the title of the message)."
+    },
+    "edit_product_pending_operations_banner_message": "Your edits are being **sent in the background** (or later in case of error).\nYou can continue editing other product fields.",
+    "@edit_product_pending_operations_banner_message": {
+        "description": "When a product has pending edits (being sent to the server), there is a message on the edit page. Please keep the ** syntax to make the text bold."
+    },
+    "edit_product_label_short": "Редактирай",
+    "@edit_product_label_short": {
+        "description": "Edit product button short label (only the verb)"
+    },
+    "edit_product_form_item_help": "How to enter \"{value}\"?",
+    "@edit_product_form_item_help": {
+        "description": "Help text for the input field. Eg 'How to enter stores?'",
         "placeholders": {
-            "itemType": {
+            "value": {
                 "type": "String"
             }
         }
     },
-    "edit_product_form_item_barcode": "Баркод",
-    "@edit_product_form_item_barcode": {
-        "description": "Product edition - Barcode"
+    "edit_product_form_item_error_empty": "Please enter a non-empty value!",
+    "@edit_product_form_item_error_empty": {
+        "description": "Error message when the user tries to submit an empty value"
+    },
+    "edit_product_form_item_error_existing": "This value is already there!",
+    "@edit_product_form_item_error_existing": {
+        "description": "Error message when the user tries to re-submit an existing value"
+    },
+    "edit_product_form_item_add_action_brand": "Add a new brand",
+    "@edit_product_form_item_add_action_brand": {
+        "description": "Tooltip to show when the user long presses the (+) button on a brand"
+    },
+    "edit_product_form_item_add_action_label": "Add a new label",
+    "@edit_product_form_item_add_action_label": {
+        "description": "Tooltip to show when the user long presses the (+) button on a label"
+    },
+    "edit_product_form_item_add_action_store": "Add a new store",
+    "@edit_product_form_item_add_action_store": {
+        "description": "Tooltip to show when the user long presses the (+) button on a store"
+    },
+    "edit_product_form_item_add_action_origin": "Add a new origin",
+    "@edit_product_form_item_add_action_origin": {
+        "description": "Tooltip to show when the user long presses the (+) button on an origin"
+    },
+    "edit_product_form_item_add_action_emb_code": "Add a new traceability code",
+    "@edit_product_form_item_add_action_emb_code": {
+        "description": "Tooltip to show when the user long presses the (+) button on a traceability code"
+    },
+    "edit_product_form_item_add_action_country": "Add a new country",
+    "@edit_product_form_item_add_action_country": {
+        "description": "Tooltip to show when the user long presses the (+) button on a country"
+    },
+    "edit_product_form_item_add_action_category": "Add a new category",
+    "@edit_product_form_item_add_action_category": {
+        "description": "Tooltip to show when the user long presses the (+) button on a category"
     },
     "edit_product_form_item_details_title": "Основни подробности",
     "@edit_product_form_item_details_title": {
@@ -1346,7 +1569,7 @@
     "@edit_product_form_item_labels_subtitle": {
         "description": "Product edition - Labels - SubTitle"
     },
-    "edit_product_form_item_labels_hint": "етикет",
+    "edit_product_form_item_labels_hint": "Input a label (eg: NutriScore)",
     "@edit_product_form_item_labels_hint": {
         "description": "Product edition - Labels - input textfield hint"
     },
@@ -1358,7 +1581,7 @@
     "@edit_product_form_item_stores_title": {
         "description": "Product edition - Stores - Title"
     },
-    "edit_product_form_item_stores_hint": "магазин",
+    "edit_product_form_item_stores_hint": "Input a store",
     "@edit_product_form_item_stores_hint": {
         "description": "Product edition - Stores - input textfield hint"
     },
@@ -1370,7 +1593,7 @@
     "@edit_product_form_item_origins_title": {
         "description": "Product edition - Origins - Title"
     },
-    "edit_product_form_item_origins_hint": "Въведи произход",
+    "edit_product_form_item_origins_hint": "Input an origin (eg: Germany)",
     "@edit_product_form_item_origins_hint": {
         "description": "Product edition - Origins - input textfield hint"
     },
@@ -1390,7 +1613,7 @@
     "@edit_product_form_item_countries_title": {
         "description": "Product edition - Countries - Title"
     },
-    "edit_product_form_item_countries_hint": "Въведи страна",
+    "edit_product_form_item_countries_hint": "Input a country (eg: Germany)",
     "@edit_product_form_item_countries_hint": {
         "description": "Product edition - Countries - input textfield hint"
     },
@@ -1406,7 +1629,7 @@
     "@edit_product_form_item_emb_codes_title": {
         "description": "Product edition - Traceability codes - Title"
     },
-    "edit_product_form_item_emb_codes_hint": "EMB 53062, BG1612009, 84 R 20, 33 RECOLTANT 522",
+    "edit_product_form_item_emb_codes_hint": "Input a code (eg: EMB 53062, FR 62.448.034 CE, 84 R 20, 33 RECOLTANT 522…)",
     "@edit_product_form_item_emb_codes_hint": {
         "description": "Product edition - Traceability Codes - input textfield hint"
     },
@@ -1426,7 +1649,7 @@
     "@edit_product_form_item_categories_hint": {
         "description": "Product edition - Categories - input textfield hint"
     },
-    "edit_product_form_item_categories_type": "категория",
+    "edit_product_form_item_categories_type": "Input a category (eg: Orange juice)",
     "@edit_product_form_item_categories_type": {
         "description": "Product edition - Categories - input textfield type"
     },
@@ -1442,6 +1665,7 @@
     "@edit_product_form_item_categories_explainer_3": {
         "description": "Product edition - Categories - input explainer, part 3"
     },
+    "edit_product_form_item_exit_title": "Quit without saving?",
     "edit_product_form_item_exit_confirmation": "Искаш ли да запазиш промените, преди да напуснеш тази страница?",
     "edit_product_form_item_exit_confirmation_positive_button": "Запази промените",
     "edit_product_form_item_exit_confirmation_negative_button": "Отхвърли промените",
@@ -1449,9 +1673,29 @@
     "@edit_product_form_item_ingredients_title": {
         "description": "Product edition - Ingredients - Title (note: this section was previously called Ingredients & Origins)"
     },
+    "edit_product_form_item_ingredients_pinch_to_zoom_tooltip": "Zoom in and out by pinching the screen",
+    "@edit_product_form_item_ingredients_pinch_to_zoom_tooltip": {
+        "description": "Product edition - Ingredients - Pinch to zoom icon explanation"
+    },
+    "edit_product_form_item_ingredients_pinch_to_zoom_title": "Zoom in and out the photo",
+    "@edit_product_form_item_ingredients_pinch_to_zoom_title": {
+        "description": "Product edition - Ingredients - Pinch to zoom explanation title"
+    },
+    "edit_product_form_item_ingredients_pinch_to_zoom_message": "Using the **Pinch-to-zoom gesture**, you can zoom in or out the photo:",
+    "@edit_product_form_item_ingredients_pinch_to_zoom_message": {
+        "description": "Product edition - Ingredients - Pinch to zoom explanation message"
+    },
     "edit_product_form_item_add_valid_item_tooltip": "Добави",
     "edit_product_form_item_add_invalid_item_tooltip": "Моля, първо въведи текст",
     "edit_product_form_item_remove_item_tooltip": "Премахни",
+    "edit_product_form_item_save_edit_item_tooltip": "Save your edit",
+    "@edit_product_form_item_save_edit_item_tooltip": {
+        "description": "The user can edit an existing item. This action will save the change."
+    },
+    "edit_product_form_item_cancel_edit_item_tooltip": "Cancel your edit",
+    "@edit_product_form_item_cancel_edit_item_tooltip": {
+        "description": "The user can edit an existing item. This action will cancel the change (and return to the initial value)."
+    },
     "edit_product_form_item_packaging_title": "Снимка с инструкции за рециклиране",
     "@edit_product_form_item_packaging_title": {
         "description": "Product edition - Packaging - Title"
@@ -1464,9 +1708,29 @@
     "@edit_product_form_item_nutrition_facts_subtitle": {
         "description": "Product edition - Nutrition facts - SubTitle"
     },
+    "edit_product_form_item_nutrition_facts_explanation": "TODO",
+    "@edit_product_form_item_nutrition_facts_explanation": {
+        "description": "DO NOT TRANSLATE Text to explain what to input in nutrition facts"
+    },
     "edit_product_form_save": "Редактирай",
     "@edit_product_form_save": {
         "description": "Product edition - Nutrition facts - Save button"
+    },
+    "edit_product_ingredients_photo_title": "Снимка на съставките",
+    "@edit_product_ingredients_photo_title": {
+        "description": "Product edition - Ingredients - Title"
+    },
+    "edit_product_ingredients_list_title": "Списък на съставките",
+    "@edit_product_ingredients_list_title": {
+        "description": "Product edition - Ingredients - Title"
+    },
+    "edit_product_packaging_photo_title": "Packaging photo",
+    "@edit_product_packaging_photo_title": {
+        "description": "Product edition - Packaging - Title"
+    },
+    "edit_product_packaging_list_title": "Packaging list",
+    "@edit_product_packaging_list_title": {
+        "description": "Product edition - Packaging - Title"
     },
     "no_data_available": "No data available",
     "@no_data_available": {
@@ -1476,12 +1740,20 @@
     "@product_field_website_title": {
         "description": "Title of a product field: website"
     },
+    "origins_editing_title": "Edit Origins",
+    "@origins_editing_title": {
+        "description": "Title of the button where users can edit the origins of a product"
+    },
     "completed_basic_details_btn_text": "Попълни основните подробности",
     "not_implemented_snackbar_text": "Все още не е внедрено",
     "category_picker_page_appbar_text": "Категории",
     "edit_ingredients_extract_ingredients_btn_text": "Extract ingredients from the photo",
     "@edit_ingredients_extract_ingredients_btn_text": {
         "description": "Ingredients edition - Extract ingredients"
+    },
+    "edit_ingredients_extract_ingredients_btn_text_short": "Извлечи съставките",
+    "@edit_ingredients_extract_ingredients_btn_text_short": {
+        "description": "Ingredients edition - Extract ingredients (short label)"
     },
     "edit_ingredients_extracting_ingredients_btn_text": "Extracting ingredients\nfrom the photo",
     "@edit_ingredients_extracting_ingredients_btn_text": {
@@ -1507,6 +1779,10 @@
     "@edit_packaging_extract_btn_text": {
         "description": "Packaging edition - OCR-Extract packaging"
     },
+    "edit_packaging_extract_btn_text_short": "Extract packaging",
+    "@edit_packaging_extract_btn_text_short": {
+        "description": "Packaging edition - OCR-Extract packaging (short label)"
+    },
     "edit_packaging_extracting_btn_text": "Extracting packaging from the photo",
     "@edit_packaging_extracting_btn_text": {
         "description": "Packaging edition - OCR-Extracting packaging"
@@ -1531,6 +1807,14 @@
     "@edit_ocr_extract_failed": {
         "description": "OCR extraction - message for failed"
     },
+    "edit_ocr_extract_disabled_title": "No picture!",
+    "@edit_ocr_extract_disabled_title": {
+        "description": "OCR extraction - title for disabled"
+    },
+    "edit_ocr_extract_disabled_message": "In order to use the text extraction feature, you must first take a photo.",
+    "@edit_ocr_extract_disabled_message": {
+        "description": "OCR extraction - message for disabled"
+    },
     "user_list_dialog_new_title": "Нов списък с продукти",
     "@user_list_dialog_new_title": {
         "description": "Title of the 'new user list' dialog"
@@ -1542,6 +1826,10 @@
     "user_list_subtitle_product": "Списъци",
     "@user_list_subtitle_product": {
         "description": "Subtitle of a paragraph about user lists in a product context"
+    },
+    "user_list_title": "Твоите списъци",
+    "@user_list_title": {
+        "description": "Label for the user lists (when the user wants to add a product to a list)"
     },
     "user_list_add_product": "Добави продукта към твоите списъци",
     "@user_list_add_product": {
@@ -1586,6 +1874,10 @@
     "user_list_name_error_same": "Това е същото име",
     "@user_list_name_error_same": {
         "description": "Validation error about the renamed name that is the same as the initial list name"
+    },
+    "user_list_name_input_hint": "Name of the list",
+    "@user_list_name_input_hint": {
+        "description": "A hint to indicate that the user should input a name of a list"
     },
     "try_again": "Опитай отново",
     "@try_again": {
@@ -1757,19 +2049,45 @@
             }
         }
     },
+    "product_type_label_food": "Food",
+    "product_type_label_beauty": "Personal care",
+    "product_type_label_pet_food": "Pet food",
+    "product_type_label_product": "Друго",
+    "product_type_selection_title": "Product type",
+    "product_type_selection_subtitle": "Select the type of this product",
+    "product_type_selection_empty": "You need to select a product type first!",
+    "@product_type_selection_empty": {
+        "description": "Error message about product type that needs to be set"
+    },
+    "product_type_selection_already": "You cannot change the product type ({productType})!",
+    "@product_type_selection_already": {
+        "description": "Error message about product type that cannot be set again",
+        "placeholders": {
+            "productType": {
+                "type": "String"
+            }
+        }
+    },
     "prices_app_dev_mode_flag": "Shortcut to Prices app on product page",
     "prices_app_button": "Go to Prices app",
-    "prices_generic_title": "Prices",
-    "prices_add_n_prices": "{count,plural, =1{Add a price} other{App {count} prices}}",
+    "prices_generic_title": "Цени",
+    "prices_add_n_prices": "{count,plural, =1{Добави цена} other{Добави {count} цени}}",
     "prices_send_n_prices": "{count,plural, =1{Send the price} other{Send {count} prices}}",
     "prices_add_an_item": "Add an item",
     "prices_add_a_price": "Add a price",
     "prices_add_a_receipt": "Add a receipt",
     "prices_add_price_tags": "Add price tags",
+    "prices_barcode_already": "This barcode ({barcode}) is already in the list!",
+    "@prices_barcode_already": {
+        "description": "Error message about barcode being already there",
+        "placeholders": {
+            "barcode": {
+                "type": "String"
+            }
+        }
+    },
     "prices_barcode_search_not_found": "Продъктът не е открит",
     "prices_barcode_search_none_yet": "No product yet",
-    "prices_barcode_search_question": "Do you want to look for this product?",
-    "prices_barcode_search_title": "Product search",
     "prices_barcode_search_running": "Looking for {barcode}",
     "@prices_barcode_search_running": {
         "description": "Dialog title about barcode look-up",
@@ -1779,6 +2097,7 @@
             }
         }
     },
+    "prices_barcode_enter": "Enter the Barcode",
     "prices_barcode_reader_action": "Barcode reader",
     "prices_view_prices": "View the prices",
     "prices_product_accessibility_summary": "{count,plural, =1{1 price} other{{count} prices}} for {product}",
@@ -1878,28 +2197,113 @@
             }
         }
     },
+    "prices_locations_list_length_many_pages": "Top {pageSize} locations (total: {total})",
+    "@prices_locations_list_length_many_pages": {
+        "description": "Number of locations for one-page result",
+        "placeholders": {
+            "pageSize": {
+                "type": "int"
+            },
+            "total": {
+                "type": "int"
+            }
+        }
+    },
+    "prices_button_count_proof": "{count,plural, =0{No proof} =1{One proof} other{{count} proofs}}",
+    "@prices_button_count_proof": {
+        "description": "Number of proofs, for a button",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "prices_button_count_product": "{count,plural, =0{No product} =1{One product} other{{count} products}}",
+    "@prices_button_count_product": {
+        "description": "Number of products, for a button",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "prices_button_count_user": "{count,plural, =0{No user} =1{One user} other{{count} users}}",
+    "@prices_button_count_user": {
+        "description": "Number of users, for a button",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "prices_button_count_price": "{count,plural, =0{No price} =1{One price} other{{count} prices}}",
+    "@prices_button_count_price": {
+        "description": "Number of prices, for a button",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
     "prices_amount_subtitle": "Amount",
     "prices_amount_is_discounted": "Is discounted?",
-    "prices_amount_price_normal": "Price",
+    "prices_amount_price_normal": "Цена",
     "prices_amount_price_discounted": "Discounted price",
     "prices_amount_price_not_discounted": "Original price",
     "prices_amount_no_product": "One product is missing!",
     "prices_amount_price_incorrect": "Incorrect value",
     "prices_amount_price_mandatory": "Mandatory value",
-    "prices_currency_subtitle": "Currency",
-    "prices_date_subtitle": "Date",
-    "prices_location_subtitle": "Shop",
+    "prices_currency_subtitle": "Валута",
+    "prices_date_subtitle": "Дата",
+    "prices_location_subtitle": "Магазин",
     "prices_location_find": "Find a shop",
     "prices_location_mandatory": "You need to select a shop!",
-    "prices_proof_subtitle": "Proof",
+    "prices_location_search_broader": "Couldn't find what you were looking for? Let's try a broader search!",
+    "prices_proof_subtitle": "Доказателство",
     "prices_proof_find": "Select a proof",
     "prices_proof_receipt": "Receipt",
     "prices_proof_price_tag": "Price tag",
     "prices_proof_mandatory": "You need to select a proof!",
     "prices_add_validation_error": "Validation error",
     "prices_privacy_warning_title": "Privacy warning",
-    "prices_privacy_warning_message": "Prices will be public, along with the store they refer to.\nThat might allow people who know about your Open Food Facts pseudonym to:\n* infer in which area you live\n* know what you are buying\nIf you are uneasy with that, please change your pseudonym, or create a new Open Food Facts account and log into the app with it.",
     "prices_unknown_product": "Unknown product",
+    "prices_privacy_warning_main_message": "Prices **will be public**, along with the store they refer to.\n\nThat might allow people who know about your Open Food Facts pseudonym to:\n",
+    "prices_privacy_warning_message_bullet_1": "Infer in which area you live",
+    "prices_privacy_warning_message_bullet_2": "Know what you are buying",
+    "prices_privacy_warning_sub_message": "If you are uneasy with that, please change your pseudonym, or create a new Open Food Facts account and log into the app with it.",
+    "i_refuse": "I refuse",
+    "i_accept": "I accept",
+    "prices_currency_change_proposal_title": "Change the currency?",
+    "prices_currency_change_proposal_message": "Your current currency is **{currency}**. Would you like to change it to **{newCurrency}**?",
+    "@prices_currency_change_proposal_message": {
+        "description": "Message to ask the user if they want to change the currency",
+        "placeholders": {
+            "currency": {
+                "type": "String"
+            },
+            "newCurrency": {
+                "type": "String"
+            }
+        }
+    },
+    "prices_currency_change_proposal_action_approve": "Yes, use {newCurrency}",
+    "@prices_currency_change_proposal_action_approve": {
+        "description": "Button to approve the currency change",
+        "placeholders": {
+            "newCurrency": {
+                "type": "String"
+            }
+        }
+    },
+    "prices_currency_change_proposal_action_cancel": "No, keep {currency}",
+    "@prices_currency_change_proposal_action_cancel": {
+        "description": "Button to cancel the currency change",
+        "placeholders": {
+            "currency": {
+                "type": "String"
+            }
+        }
+    },
     "@prices_unknown_product": {
         "description": "Very small text, in the context of prices, to say that the product is unknown"
     },
@@ -1913,9 +2317,13 @@
     "dev_mode_section_ui": "User Interface",
     "dev_mode_section_data": "Данни",
     "dev_mode_section_experimental_features": "Experimental features",
-    "dev_mode_hide_ecoscore_title": "Изключи Eco-Score",
-    "@dev_mode_hide_ecoscore_title": {
-        "description": "User dev preferences - Disable Ecoscore - Title"
+    "dev_preferences_show_folksonomy_title": "Exclude Folksonomy",
+    "@dev_preferences_show_folksonomy_title": {
+        "description": "Title for switch toggle to show or hide folksonomy, product tags on product details page"
+    },
+    "dev_mode_hide_environmental_score_title": "Exclude Green Score",
+    "@dev_mode_hide_environmental_score_title": {
+        "description": "User dev preferences - Disable Green Score - Title"
     },
     "dev_mode_spellchecker_for_ocr_title": "Use a spellchecker for OCR screens",
     "@dev_mode_spellchecker_for_ocr_title": {
@@ -1976,7 +2384,7 @@
     "@user_search_to_be_completed_title": {
         "description": "User search (to be completed): list tile title"
     },
-    "user_search_prices_title": "My prices",
+    "user_search_prices_title": "Моите цени",
     "@user_search_prices_title": {
         "description": "User prices: list tile title"
     },
@@ -1992,7 +2400,7 @@
     "@user_any_search_prices_title": {
         "description": "User prices (everybody except me): list tile title"
     },
-    "all_search_prices_latest_title": "Latest Prices added",
+    "all_search_prices_latest_title": "Последни добавени цени",
     "@all_search_prices_latest_title": {
         "description": "Latest prices: list tile title"
     },
@@ -2000,11 +2408,15 @@
     "@all_search_prices_top_user_title": {
         "description": "Top price users: list tile title"
     },
-    "all_search_prices_top_location_title": "Stores with the most prices",
+    "all_search_prices_top_location_title": "Магазини с най-много цени",
     "@all_search_prices_top_location_title": {
         "description": "Top price locations: list tile title"
     },
-    "all_search_prices_top_product_title": "Products with the most prices",
+    "all_search_prices_top_location_single_title": "Prices in a store",
+    "@all_search_prices_top_location_single_title": {
+        "description": "Top price locations: list tile title"
+    },
+    "all_search_prices_top_product_title": "Продукти с най-много цени",
     "@all_search_prices_top_product_title": {
         "description": "Top price products: list tile title"
     },
@@ -2012,7 +2424,7 @@
     "@all_search_to_be_completed_title": {
         "description": "All products to be completed: list tile title"
     },
-    "categorize_products_country_title": "Help categorize products in your country",
+    "categorize_products_country_title": "Помогни с категоризирането на продукти в страната си",
     "@categorize_products_country_title": {
         "description": "Help categorize products in your country: list tile title"
     },
@@ -2074,8 +2486,12 @@
     "@edit_photo_select_existing_button_label": {
         "description": "Edit 'select existing image' button label"
     },
-    "edit_photo_select_existing_all_label": "Съществуващи снимки",
+    "edit_photo_select_existing_all_label": "Existing images for this product",
     "@edit_photo_select_existing_all_label": {
+        "description": "Page title"
+    },
+    "edit_photo_select_existing_all_subtitle": "Select an image by clicking on it",
+    "@edit_photo_select_existing_all_subtitle": {
         "description": "Page title"
     },
     "edit_photo_select_existing_download_label": "Извличане на съществуващите снимки…",
@@ -2101,9 +2517,13 @@
     "basic_details": "Основни подробности",
     "product_name": "Име на продукта",
     "add_basic_details_product_name_error": "Моля, въведи името на продукта",
+    "add_basic_details_product_name_hint": "Input the name of the product (eg: Nutella)",
     "brand_name": "Марка",
+    "brand_names": "Brand names",
     "add_basic_details_brand_name_error": "Моля, въведи името на марката",
+    "add_basic_details_brand_names_hint": "Input brands (eg: Ferrero)",
     "quantity": "Количество и тегло",
+    "add_basic_details_quantity_hint": "Input the weight and if needed the quantity (eg : 4x100g)",
     "barcode": "Баркод",
     "barcode_barcode": "Баркод: {barcode}",
     "@barcode_barcode": {
@@ -2246,7 +2666,34 @@
     },
     "share_product_text": "Have a look at this product on Open Food Facts: {url}",
     "@share_product_text": {
-        "description": "The content which is send, when sharing a product",
+        "description": "The content which is send, when sharing a 'food' product",
+        "placeholders": {
+            "url": {
+                "type": "String"
+            }
+        }
+    },
+    "share_product_text_beauty": "Have a look at this product on Open Beauty Facts: {url}",
+    "@share_product_text_beauty": {
+        "description": "The content which is send, when sharing a 'beauty' product",
+        "placeholders": {
+            "url": {
+                "type": "String"
+            }
+        }
+    },
+    "share_product_text_pet_food": "Have a look at this product on Open PetFood Facts: {url}",
+    "@share_product_text_pet_food": {
+        "description": "The content which is send, when sharing a 'pet food' product",
+        "placeholders": {
+            "url": {
+                "type": "String"
+            }
+        }
+    },
+    "share_product_text_product": "Have a look at this product on Open Products Facts: {url}",
+    "@share_product_text_product": {
+        "description": "The content which is send, when sharing a 'products' product",
         "placeholders": {
             "url": {
                 "type": "String"
@@ -2300,6 +2747,11 @@
         "description": "Label for expanding nutrition facts table in application setting"
     },
     "expand_ingredients_body": "Дръж панела на съставките разгънат",
+    "search_product_filter_visibility_title": "Показване на филтър в търсенето",
+    "search_product_filter_visibility_subtitle": "Избер на сайт за търсене: Open Food Facts, Open Beauty Facts, Open Pet Food Facts или Open Products Facts",
+    "@search_product_filter_visibility_subtitle": {
+        "description": "Label for showing the product type filter in the search bar"
+    },
     "no_internet_connection": "Няма интернет връзка",
     "@no_internet_connection": {
         "description": "Message when there is no internet connection"
@@ -2316,28 +2768,31 @@
     "@copy_to_clipboard": {
         "description": "Copy to clipboard button description"
     },
-    "paste_from_clipboard": "Paste from clipboard",
+    "paste_from_clipboard": "Вмъкни от клипборда",
     "@paste_from_clipboard": {
         "description": "Paste the content of the clipboard"
     },
-    "no_data_available_in_clipboard": "No data available in your clipboard",
+    "no_data_available_in_clipboard": "Няма налични данни в клипборда ви",
     "@no_data_available_in_clipboard": {
         "description": "No data available in your clipboard"
     },
     "clipboard_barcode_copy": "Копирай баркода в клипборда",
     "@clipboard_barcode_copied": {
-        "description": "Snackbar label after clipboard copy",
-        "placeholders": {
-            "barcode": {
-                "type": "String",
-                "description": "barcode"
-            }
-        }
+        "description": "Snackbar label after clipboard copy"
     },
     "clipboard_barcode_copied": "Баркода {barcode} е копиран в системния буфер!",
+    "open_product_website": "Open this product on the website",
     "language_picker_label": "Твоят език",
     "@language_picker_label": {
         "description": "Choose Application Language"
+    },
+    "country_picker_label": "Your country",
+    "@country_picker_label": {
+        "description": "Choose Application Country"
+    },
+    "currency_picker_label": "Your currency",
+    "@currency_picker_label": {
+        "description": "Choose Application Country"
     },
     "help_with_openfoodfacts": "Помощ с OpenFoodFacts",
     "@help_with_openfoodfacts": {
@@ -2381,7 +2836,7 @@
     },
     "scan_header_compare_button_valid_state_tooltip": "Кликни, за да сравниш продуктите, които си сканирал",
     "@scan_header_compare_button_valid_state_tooltip": {
-        "description": "Tooltip (message visible with a long-press) on the Compare button on top of the scanner, when there is at least two prodiucts"
+        "description": "Tooltip (message visible with a long-press) on the Compare button on top of the scanner, when there is at least two products"
     },
     "scan_product_loading": "You have scanned\nthe barcode:",
     "@scan_product_loading": {
@@ -2427,6 +2882,10 @@
             }
         }
     },
+    "portion_calculator_computation_error": "Missing data. Calculation could not be performed.",
+    "@portion_calculator_computation_error": {
+        "description": "Error message to explain that the computation of the portion calculator failed."
+    },
     "portion_calculator_result_title": "Хранителни стойности за {grams} г (или мл)",
     "@portion_calculator_result_title": {
         "description": "Title of the results of the portion calculator.",
@@ -2468,9 +2927,9 @@
     "@user_picture_source_remember": {
         "description": "Checkbox label when select a picture source"
     },
-    "user_picture_source_select": "Избери всеки път",
-    "@user_picture_source_select": {
-        "description": "Choice of selecting the picture source each time"
+    "user_picture_source_ask": "Ask each time",
+    "@user_picture_source_ask": {
+        "description": "Choice of asking the picture source every time"
     },
     "robotoff_continue": "Продължи",
     "@robotoff_continue": {
@@ -2495,6 +2954,22 @@
     "app_rating_dialog_title_enjoying_positive_actions": "Да!",
     "not_really": "Не особено",
     "app_rating_dialog_title_not_enjoying_app": "Съжаляваме да чуем това! Би ли ни казал какво се случи?",
+    "owner_field_info_title": "Producer provided values",
+    "@owner_field_info_title": {
+        "description": "Title of the 'producer provided' info list-tile"
+    },
+    "owner_field_info_message": "With that logo we highlight data provided by the producer, and that may not be editable.",
+    "@owner_field_info_message": {
+        "description": "Title of the 'producer provided' info list-tile"
+    },
+    "owner_field_info_close_button": "Close this info",
+    "@owner_field_info_close_button": {
+        "description": "The owner info may be shown in a closeable dialog. This is the label of the button (used on a long press event and for the accessibility label)."
+    },
+    "owner_field_image": "This image is provided by the producer. It may not be editable.",
+    "@owner_field_image": {
+        "description": "An image is directly provided by the producer. It may be locked and not be editable."
+    },
     "edit_packagings_title": "Части на опаковката",
     "@edit_packagings_title": {
         "description": "Title of the structured packagings page"
@@ -2796,7 +3271,7 @@
     "@country_selector_title": {
         "description": "Label written as the title of the dialog to select the user country"
     },
-    "currency_selector_title": "Select your currency:",
+    "currency_selector_title": "Избери валута:",
     "@currency_selector_title": {
         "description": "Label written as the title of the dialog to select the user currency"
     },
@@ -2840,14 +3315,14 @@
     "nutriscore_unknown_new_formula": "Unknown Nutri-Score (New calculation)",
     "nutriscore_not_applicable": "Nutri-Score is not applicable",
     "nutriscore_not_applicable_new_formula": "Nutri-Score is not applicable (New calculation)",
-    "ecoscore_generic": "Eco-Score",
-    "ecoscore_a": "Eco-Score A",
-    "ecoscore_b": "Eco-Score B",
-    "ecoscore_c": "Eco-Score C",
-    "ecoscore_d": "Eco-Score D",
-    "ecoscore_e": "Eco-Score E",
-    "ecoscore_unknown": "Unknown Eco-Score",
-    "ecoscore_not_applicable": "Eco-Score is not applicable",
+    "environmental_score_generic": "Green Score",
+    "environmental_score_a": "Green Score A",
+    "environmental_score_b": "Green Score B",
+    "environmental_score_c": "Green Score C",
+    "environmental_score_d": "Green Score D",
+    "environmental_score_e": "Green Score E",
+    "environmental_score_unknown": "Unknown Green Score",
+    "environmental_score_not_applicable": "Green Score is not applicable",
     "nova_group_generic": "Свръх преработка - групи NOVA",
     "nova_group_1": "NOVA Group 1",
     "nova_group_2": "NOVA Group 2",
@@ -2916,7 +3391,7 @@
     "@guide_nutriscore_v2_file_language": {
         "description": "The logo is only available in de/en/fr/ln/nl. Please use en if not available (in lowercase, please)."
     },
-    "guide_nutriscore_v2_what_is_nutriscore_title": "What is the Nutri-Score?",
+    "guide_nutriscore_v2_what_is_nutriscore_title": "Какво представлява Nutri-Score?",
     "guide_nutriscore_v2_what_is_nutriscore_paragraph1": "The Nutri-Score is a logo which aims to inform you about the **nutritional quality of foods**.",
     "@guide_nutriscore_v2_what_is_nutriscore_paragraph1": {
         "description": "Text between asterisks (eg: **My Text**) means text in bold. Please try to keep it."
@@ -2960,5 +3435,303 @@
     "prices_feedback_form": "Click here to send us your feedback about this new feature!",
     "@prices_feedback_form": {
         "description": "A button to send feedback about the prices feature"
+    },
+    "menu_button_list_actions": "Select an action",
+    "@menu_button_list_actions": {
+        "description": "Button to select an action in a list (eg: Share, Delete, …)"
+    },
+    "error_loading_photo": "Error loading photo",
+    "@error_loading_photo": {
+        "description": "Error message when loading a photo fails to load"
+    },
+    "photo_viewer_action_use_picture_as": "Use as…",
+    "@photo_viewer_action_use_picture_as": {
+        "description": "An action to use the current picture to be used as front/ingredients…"
+    },
+    "photo_viewer_use_picture_as_title": "Use this picture as… ({language})",
+    "@photo_viewer_use_picture_as": {
+        "description": "The title of a dialog to use the current picture as front/ingredients…",
+        "placeholders": {
+            "language": {
+                "type": "String"
+            }
+        }
+    },
+    "photo_viewer_details_button": "Details",
+    "@photo_viewer_details_button": {
+        "description": "Button to show details of the photo"
+    },
+    "photo_viewer_details_button_accessibility_label": "Details of this photo",
+    "@photo_viewer_details_button_accessibility_label": {
+        "description": "Accessibility label for the Details button on a photo"
+    },
+    "photo_viewer_details_title": "Details of the photo",
+    "@photo_viewer_details_title": {
+        "description": "Title of the photo details dialog"
+    },
+    "photo_viewer_details_contributor_title": "Сътрудник",
+    "@photo_viewer_details_contributor_title": {
+        "description": "Label for the author of a photo"
+    },
+    "photo_viewer_details_size_title": "Size",
+    "@photo_viewer_details_size_title": {
+        "description": "Label for the size of a photo"
+    },
+    "photo_viewer_details_size_value": "{width} x {height} pixels",
+    "@photo_viewer_details_size_value": {
+        "description": "Value for the size of a photo",
+        "placeholders": {
+            "width": {
+                "type": "int"
+            },
+            "height": {
+                "type": "int"
+            }
+        }
+    },
+    "photo_viewer_details_date_title": "Дата",
+    "@photo_viewer_details_date_title": {
+        "description": "Label for the uploaded date of a photo"
+    },
+    "photo_viewer_details_url_title": "URL",
+    "@photo_viewer_details_url_title": {
+        "description": "Label for the link of a photo"
+    },
+    "product_page_compatibility_score": "Съвместим",
+    "@product_page_compatibility_score": {
+        "description": "Compatibility score on top of the product page. The sentence is \"100%\" Compatible"
+    },
+    "user_lists_action_multi_select": "Multi-select",
+    "@user_lists_action_multi_select": {
+        "description": "The button label for multi-selecting products in a user list"
+    },
+    "product_page_compatibility_score_tooltip": "Your compatibility score: {score}%",
+    "@product_page_compatibility_score_tooltip": {
+        "description": "Message explaining that the score is the compatibility score",
+        "placeholders": {
+            "score": {
+                "type": "String"
+            }
+        }
+    },
+    "product_image_front_accessibility_label": "Предна снимка",
+    "@product_image_front_accessibility_label": {
+        "description": "Accessibility label for the image on the product page"
+    },
+    "product_image_ingredients_accessibility_label": "Снимка на съставките",
+    "@product_image_ingredients_accessibility_label": {
+        "description": "Accessibility label for the image of ingredients"
+    },
+    "product_image_nutrition_accessibility_label": "Nutrition picture",
+    "@product_image_nutrition_accessibility_label": {
+        "description": "Accessibility label for the image of the nutrition"
+    },
+    "product_image_packaging_accessibility_label": "Packaging picture",
+    "@product_image_packaging_accessibility_label": {
+        "description": "Accessibility label for the image of the packaging"
+    },
+    "product_image_other_accessibility_label": "Other picture",
+    "@product_image_other_accessibility_label": {
+        "description": "Accessibility label for an image"
+    },
+    "product_image_outdated_message": "This picture may be outdated",
+    "@product_image_outdated_message": {
+        "description": "Small message to indicate that the image may be outdated"
+    },
+    "product_image_outdated_message_accessibility_label": "{type} (this image may be outdated)",
+    "@product_image_outdated_message_accessibility_label": {
+        "description": "Accessibility label for the image on the product page when it may be outdated",
+        "placeholders": {
+            "type": {
+                "type": "String"
+            }
+        }
+    },
+    "product_image_locked_message_accessibility_label": "{type} (this image may be locked by the producer)",
+    "@product_image_locked_message_accessibility_label": {
+        "description": "Accessibility label for the image on the product page when it may be locked (producer provided)",
+        "placeholders": {
+            "type": {
+                "type": "String"
+            }
+        }
+    },
+    "product_image_error": "Unable to load the image!",
+    "@product_image_error": {
+        "description": "Small message that will be displayed above the picture (please keep it short)"
+    },
+    "product_image_error_accessibility_label": "Unable to load the {type} (network error?)",
+    "@product_image_error_accessibility_label": {
+        "description": "Accessibility label for the image on the product page when it fails to load",
+        "placeholders": {
+            "type": {
+                "type": "String"
+            }
+        }
+    },
+    "product_page_image_no_image_available": "No\nimage!",
+    "@product_page_image_no_image_available": {
+        "description": "Small message that will be displayed above the picture (please keep it short) when there is no image available on the database. A line break is not mandatory."
+    },
+    "product_page_image_no_image_available_accessibility_label": "No picture available for this product",
+    "@product_page_image_no_image_available_accessibility_label": {
+        "description": "Accessibility label for the image on the product page when there is no image available on the database"
+    },
+    "product_page_action_bar_settings_accessibility_label": "Reorder or hide actions",
+    "@product_page_action_bar_settings_accessibility_label": {
+        "description": "Accessibility label for the Settings icon in the action bar (= bottom bar) on the product page"
+    },
+    "product_page_action_bar_setting_modal_title": "Edit actions",
+    "@product_page_action_bar_setting_modal_title": {
+        "description": "Title for the modal allowing to show and reorder actions"
+    },
+    "product_page_action_bar_item_move_up": "Move up",
+    "@product_page_action_bar_item_move_up": {
+        "description": "Accessibility label to move up an action"
+    },
+    "product_page_action_bar_item_move_down": "Move down",
+    "@product_page_action_bar_item_move_down": {
+        "description": "Accessibility label to move down an action"
+    },
+    "product_page_action_bar_item_enable": "Enable action",
+    "@product_page_action_bar_item_enable": {
+        "description": "Accessibility label to enable action (= make it visible)"
+    },
+    "product_page_action_bar_item_disable": "Disable action",
+    "@product_page_action_bar_item_disable": {
+        "description": "Accessibility label to disable action (= make it invisible)"
+    },
+    "product_page_pending_operations_banner_title": "Uploading your edits…",
+    "@product_page_pending_operations_banner_title": {
+        "description": "When a product has pending edits (being sent to the server), there is a message on the product page (here is the title of the message)."
+    },
+    "product_page_pending_operations_banner_message": "The data displayed on this page **does not yet reflect your modifications**.\nPlease wait a few seconds…",
+    "@product_page_pending_operations_banner_message": {
+        "description": "When a product has pending edits (being sent to the server), there is a message on the product page. Please keep the ** syntax to make the text bold."
+    },
+    "product_add_a_language": "Add a language",
+    "@product_add_a_language": {
+        "description": "Button to add a language (eg: for photos) to a product"
+    },
+    "barcode_accessibility_label": "Barcode {barcode}",
+    "@barcode_accessibility_label": {
+        "description": "Accessibility label for a barcode image",
+        "placeholders": {
+            "barcode": {
+                "type": "String"
+            }
+        }
+    },
+    "carousel_close_tooltip": "Remove this product from the carousel",
+    "@carousel_close_tooltip": {
+        "description": "A message explaining the goal of the Close button on a card of the carousel"
+    },
+    "carousel_unsupported_header": "Unsupported barcode!",
+    "@carousel_unsupported_header": {
+        "description": "A label on top of the carousel card when the barcode is not supported by the app"
+    },
+    "carousel_unsupported_title": "Ooops!",
+    "carousel_unsupported_text": "The barcode scanned is not supported by Open Food Facts!",
+    "carousel_error_header": "Error!",
+    "@carousel_error_header": {
+        "description": "A label on top of the carousel card when there is an error (mainly network issues)"
+    },
+    "carousel_error_title": "It's a bummer!",
+    "carousel_error_text_1": "We couldn't download information on this barcode:",
+    "carousel_error_text_2": "Please check your Internet connection or click this button:",
+    "@carousel_error_text_2": {
+        "description": "Please keep the ** syntax to make the text bold"
+    },
+    "carousel_error_button": "Повторен опит",
+    "carousel_unknown_product_header": "Unknown product",
+    "@carousel_unknown_product_header": {
+        "description": "A label on top of the carousel card when the product is not in the database (= it needs to be created)"
+    },
+    "carousel_unknown_product_title": "Congratulations!\nYou've found __the rare gem!__",
+    "@carousel_unknown_product_title": {
+        "description": "Please keep the __ syntax to underline the text"
+    },
+    "carousel_unknown_product_text": "Our collaborative database contains more than **3 million products**, but this barcode doesn't exist: ",
+    "@carousel_unknown_product_text": {
+        "description": "Please keep the ** syntax to make the text bold"
+    },
+    "carousel_unknown_product_button": "Добави продукта",
+    "carousel_loading_header": "Loading information...",
+    "@carousel_loading_header": {
+        "description": "A label on top of the carousel card when data about the product is loading"
+    },
+    "carousel_loading_title": "You've just scanned a product with the following barcode:",
+    "carousel_loading_text": "We are searching for it in our database of more than **3 million products!**",
+    "@carousel_loading_text": {
+        "description": "Please keep the ** syntax to make the text bold"
+    },
+    "product_type_subtitle_food": "Vegetables, fruits, frozen food…",
+    "@product_type_subtitle_food": {
+        "description": "Example of products for food category"
+    },
+    "product_type_subtitle_beauty": "Makeup, soaps, toothpastes…",
+    "@product_type_subtitle_beauty": {
+        "description": "Example of products for beauty category"
+    },
+    "product_type_subtitle_pet_food": "Food for dogs, cats…",
+    "@product_type_subtitle_pet_food": {
+        "description": "Example of products for pet food category"
+    },
+    "product_type_subtitle_product": "Smartphones, furniture…",
+    "@product_type_subtitle_product": {
+        "description": "Example of products for other categories"
+    },
+    "photo_field_front": "Product photo",
+    "photo_field_ingredients": "Снимка на съставките",
+    "photo_field_nutrition": "Nutrition photo",
+    "photo_field_packaging": "Снимка с информация за опаковката",
+    "photo_already_exists": "This photo already exists",
+    "photo_missing": "This photo is missing",
+    "date": "Дата",
+    "photo_rotate_left": "Завърти наляво",
+    "@photo_rotate_left": {
+        "description": "Button to rotate a photo to the left"
+    },
+    "photo_rotate_right": "Завърти надясно",
+    "@photo_rotate_right": {
+        "description": "Button to rotate a photo to the right"
+    },
+    "photo_undo_action": "Undo the previous action",
+    "@photo_undo_action": {
+        "description": "Button to undo the previous action on a photo"
+    },
+    "knowledge_panel_world_map_accessibility_label": "A world map of {location}",
+    "@knowledge_panel_world_map_accessibility_label": {
+        "description": "Accessibility label for the world map in the knowledge panel",
+        "placeholders": {
+            "location": {
+                "type": "String"
+            }
+        }
+    },
+    "open_street_map_contributor_attribution": "OpenStreetMap contributors",
+    "@open_street_map_contributor_attribution": {
+        "description": "Attribution for OpenStreetMap contributors"
+    },
+    "not_applicable_short": "N/A",
+    "@not_applicable_short": {
+        "description": "Acronym for Not Applicable"
+    },
+    "knowledge_panel_warning_text": "Предупреждение",
+    "@knowledge_panel_warning_text": {
+        "description": "Warning text at the beginning of a sentence in the knowledge panel (you can find this word on the NutriScore KP of 3033491279300)"
+    },
+    "knowledge_panel_nutriscore_banner_incorrect_score_title": "Why is this Nutri-Score different from the one on the package?",
+    "knowledge_panel_nutriscore_banner_incorrect_score_message": "There are two possible explanations:\nThe list of ingredients and/or nutrition facts are not up-to-date.\n\nWe provide the \"New calculation\" of the Nutri-Score (or V2). Please check that you have the banner \"New calculation\" on the package.",
+    "knowledge_panel_nutriscore_banner_incorrect_score_button1": "Check ingredients",
+    "knowledge_panel_nutriscore_banner_incorrect_score_button2": "Check nutrition facts",
+    "url_not_supported": "Unfortunately, we can't open the URL:\n{url}",
+    "@url_not_supported": {
+        "description": "Error message when the app can't open a URL",
+        "placeholders": {
+            "url": {
+                "type": "String"
+            }
+        }
     }
 }

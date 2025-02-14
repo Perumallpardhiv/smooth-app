@@ -3,9 +3,11 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:smooth_app/data_models/preferences/user_preferences.dart';
 import 'package:smooth_app/helpers/global_vars.dart';
+import 'package:smooth_app/query/product_query.dart';
 
 /// Category for Matomo Events
 enum AnalyticsCategory {
@@ -20,7 +22,8 @@ enum AnalyticsCategory {
   robotoff(tag: 'robotoff'),
   list(tag: 'list'),
   deepLink(tag: 'deep link'),
-  hungerGame(tag: 'hunger game');
+  hungerGame(tag: 'hunger game'),
+  appRating(tag: 'app rating');
 
   const AnalyticsCategory({required this.tag});
 
@@ -74,7 +77,7 @@ enum AnalyticsEvent {
     tag: 'nutriscore not applicable - no fast-track product edit card',
     category: AnalyticsCategory.productFastTrackEdit,
   ),
-  notShowFastTrackProductEditCardEcoscore(
+  notShowFastTrackProductEditCardEnvironmentalScore(
     tag: 'ecoscore not applicable - no fast-track product edit card',
     category: AnalyticsCategory.productFastTrackEdit,
   ),
@@ -145,6 +148,18 @@ enum AnalyticsEvent {
   hungerGameOpened(
     tag: 'hunger game opened',
     category: AnalyticsCategory.hungerGame,
+  ),
+  appRatingSatisfied(
+    tag: 'satisfied',
+    category: AnalyticsCategory.appRating,
+  ),
+  appRatingNeutral(
+    tag: 'neutral',
+    category: AnalyticsCategory.appRating,
+  ),
+  appRatingNotSatisfied(
+    tag: 'not satisfied',
+    category: AnalyticsCategory.appRating,
   );
 
   const AnalyticsEvent({required this.tag, required this.category});
@@ -275,9 +290,12 @@ class AnalyticsHelper {
     return event;
   }
 
+  static late PackageInfo _packageInfo;
+
   static Future<void> initMatomo(
     final bool screenshotMode,
   ) async {
+    _packageInfo = await PackageInfo.fromPlatform();
     if (screenshotMode) {
       _setCrashReports(false);
       _setAnalyticsReports(false);
@@ -323,13 +341,11 @@ class AnalyticsHelper {
     int? eventValue,
     String? barcode,
   }) =>
-      MatomoTracker.instance.trackEvent(
-        eventInfo: EventInfo(
-          name: msg.name,
-          category: msg.category.tag,
-          action: msg.name,
-          value: eventValue ?? _formatBarcode(barcode),
-        ),
+      trackCustomEvent(
+        msg.name,
+        msg.category.tag,
+        eventValue: eventValue,
+        barcode: barcode,
       );
 
   // Used by code which is outside of the core:smooth_app code
@@ -339,26 +355,51 @@ class AnalyticsHelper {
     String category, {
     int? eventValue,
     String? barcode,
-  }) =>
-      MatomoTracker.instance.trackEvent(
-        eventInfo: EventInfo(
-          name: msg,
-          category: category,
-          action: msg,
-          value: eventValue ?? _formatBarcode(barcode),
-        ),
-      );
+    String? action,
+    ProductType? productType,
+  }) {
+    final Map<String, String> dimensions = <String, String>{
+      'dimension1': ProductQuery.getLanguage().offTag,
+      'dimension2': ProductQuery.getCountry().offTag,
+      'dimension3': ProductQuery.isLoggedIn() ? 'Y' : 'N',
+      'dimension4': _packageInfo.version,
+      'dimension5': productType?.offTag ?? '',
+    };
+    MatomoTracker.instance.trackEvent(
+      eventInfo: EventInfo(
+        name: msg,
+        category: category,
+        action: action ?? msg,
+        value: eventValue ?? _formatBarcode(barcode),
+      ),
+      dimensions: dimensions,
+    );
+  }
 
   static void trackProductEdit(
-          AnalyticsEditEvents editEventName, String barcode,
-          [bool saved = false]) =>
-      MatomoTracker.instance.trackEvent(
-        eventInfo: EventInfo(
-          name: saved ? '${editEventName.name}-saved' : editEventName.name,
-          category: AnalyticsCategory.productEdit.tag,
-          action: editEventName.name,
-          value: _formatBarcode(barcode),
-        ),
+    AnalyticsEditEvents editEventName,
+    Product product, [
+    bool saved = false,
+  ]) =>
+      trackCustomEvent(
+        saved ? '${editEventName.name}-saved' : editEventName.name,
+        AnalyticsCategory.productEdit.tag,
+        action: editEventName.name,
+        barcode: product.barcode,
+        productType: product.productType ?? ProductType.food,
+      );
+
+  static void trackProductEvent(
+    AnalyticsEvent msg, {
+    int? eventValue,
+    required Product product,
+  }) =>
+      trackCustomEvent(
+        msg.name,
+        msg.category.tag,
+        eventValue: eventValue,
+        barcode: product.barcode,
+        productType: product.productType ?? ProductType.food,
       );
 
   static void trackSearch({

@@ -9,8 +9,8 @@ class SmoothBackButton extends StatelessWidget {
   const SmoothBackButton({
     this.onPressed,
     this.iconColor,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final VoidCallback? onPressed;
   final Color? iconColor;
@@ -34,7 +34,7 @@ class SmoothBackButton extends StatelessWidget {
             child: Padding(
               padding: _iconPadding,
               child: Icon(
-                ConstantIcons.instance.getBackIcon(),
+                ConstantIcons.backIcon,
                 color: iconColor ??
                     (Theme.of(context).colorScheme.brightness ==
                             Brightness.light
