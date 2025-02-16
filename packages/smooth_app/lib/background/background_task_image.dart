@@ -9,6 +9,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_app/background/background_task_barcode.dart';
+import 'package:smooth_app/background/background_task_queue.dart';
 import 'package:smooth_app/background/background_task_refresh_later.dart';
 import 'package:smooth_app/background/background_task_upload.dart';
 import 'package:smooth_app/background/operation_type.dart';
@@ -22,6 +23,7 @@ class BackgroundTaskImage extends BackgroundTaskUpload {
     required super.processName,
     required super.uniqueId,
     required super.barcode,
+    required super.productType,
     required super.language,
     required super.stamp,
     required super.imageField,
@@ -34,9 +36,9 @@ class BackgroundTaskImage extends BackgroundTaskUpload {
     required this.fullPath,
   });
 
-  BackgroundTaskImage.fromJson(Map<String, dynamic> json)
+  BackgroundTaskImage.fromJson(super.json)
       : fullPath = json[_jsonTagImagePath] as String,
-        super.fromJson(json);
+        super.fromJson();
 
   static const String _jsonTagImagePath = 'imagePath';
 
@@ -58,6 +60,7 @@ class BackgroundTaskImage extends BackgroundTaskUpload {
   /// Adds the background task about uploading a product image.
   static Future<void> addTask(
     final String barcode, {
+    required final ProductType? productType,
     required final OpenFoodFactsLanguage language,
     required final ImageField imageField,
     required final File fullFile,
@@ -77,6 +80,7 @@ class BackgroundTaskImage extends BackgroundTaskUpload {
     final BackgroundTaskBarcode task = _getNewTask(
       language,
       barcode,
+      productType ?? ProductType.food,
       imageField,
       fullFile,
       croppedFile,
@@ -90,21 +94,23 @@ class BackgroundTaskImage extends BackgroundTaskUpload {
     if (!context.mounted) {
       return;
     }
-    await task.addToManager(localDatabase, context: context);
+    await task.addToManager(
+      localDatabase,
+      context: context,
+      queue: BackgroundTaskQueue.slow,
+    );
   }
 
   @override
   (String, AlignmentGeometry)? getFloatingMessage(
           final AppLocalizations appLocalizations) =>
-      (
-        appLocalizations.image_upload_queued,
-        AlignmentDirectional.center,
-      );
+      null;
 
   /// Returns a new background task about changing a product.
   static BackgroundTaskImage _getNewTask(
     final OpenFoodFactsLanguage language,
     final String barcode,
+    final ProductType productType,
     final ImageField imageField,
     final File fullFile,
     final File croppedFile,
@@ -118,6 +124,7 @@ class BackgroundTaskImage extends BackgroundTaskUpload {
       BackgroundTaskImage._(
         uniqueId: uniqueId,
         barcode: barcode,
+        productType: productType,
         processName: _operationType.processName,
         imageField: imageField.offTag,
         fullPath: fullFile.path,
@@ -176,6 +183,7 @@ class BackgroundTaskImage extends BackgroundTaskUpload {
       await BackgroundTaskRefreshLater.addTask(
         barcode,
         localDatabase: localDatabase,
+        productType: productType,
       );
     }
   }
@@ -235,20 +243,24 @@ class BackgroundTaskImage extends BackgroundTaskUpload {
     required final int cropX2,
     required final int cropY2,
     final CustomPainter? overlayPainter,
+    required final int compressQuality,
+    required final bool forceCompression,
   }) async {
     final ui.Image full = await loadUiImage(
         await (await BackgroundTaskUpload.getFile(fullPath)).readAsBytes());
-    if (cropX1 == 0 &&
-        cropY1 == 0 &&
-        cropX2 == _cropConversionFactor &&
-        cropY2 == _cropConversionFactor &&
-        rotationDegrees == 0) {
-      if (!isPictureBigEnough(full.width, full.height)) {
-        return null;
-      }
-      // in that case, no need to crop
-      if (overlayPainter == null) {
-        return fullPath;
+    if (!forceCompression) {
+      if (cropX1 == 0 &&
+          cropY1 == 0 &&
+          cropX2 == _cropConversionFactor &&
+          cropY2 == _cropConversionFactor &&
+          rotationDegrees == 0) {
+        if (!isPictureBigEnough(full.width, full.height)) {
+          return null;
+        }
+        // in that case, no need to crop
+        if (overlayPainter == null) {
+          return fullPath;
+        }
       }
     }
 
@@ -285,6 +297,7 @@ class BackgroundTaskImage extends BackgroundTaskUpload {
     await saveJpeg(
       file: await BackgroundTaskUpload.getFile(croppedPath),
       source: cropped,
+      quality: compressQuality,
     );
     return croppedPath;
   }
@@ -303,6 +316,8 @@ class BackgroundTaskImage extends BackgroundTaskUpload {
       cropY1: cropY1,
       cropX2: cropX2,
       cropY2: cropY2,
+      compressQuality: 100,
+      forceCompression: false,
     );
     if (path == null) {
       // TODO(monsieurtanuki): maybe something more refined when we dismiss the picture, like alerting the user, though it's not supposed to happen anymore from upstream.

@@ -6,7 +6,6 @@ import 'package:smooth_app/generic_lib/design_constants.dart';
 import 'package:smooth_app/generic_lib/widgets/smooth_back_button.dart';
 import 'package:smooth_app/generic_lib/widgets/smooth_card.dart';
 import 'package:smooth_app/helpers/launch_url_helper.dart';
-import 'package:smooth_app/pages/prices/price_button.dart';
 import 'package:smooth_app/pages/prices/price_count_widget.dart';
 import 'package:smooth_app/pages/prices/price_user_button.dart';
 import 'package:smooth_app/query/product_query.dart';
@@ -45,7 +44,7 @@ class _PricesUsersPageState extends State<PricesUsersPage>
             icon: const Icon(Icons.open_in_new),
             onPressed: () async => LaunchUrlHelper.launchURL(
               OpenPricesAPIClient.getUri(
-                path: 'app/users',
+                path: 'users',
                 uriHelper: ProductQuery.uriPricesHelper,
               ).toString(),
             ),
@@ -79,26 +78,18 @@ class _PricesUsersPageState extends State<PricesUsersPage>
           final List<Widget> children = <Widget>[];
 
           for (final PriceUser item in result.items!) {
+            final int priceCount = item.priceCount ?? 0;
             children.add(
               SmoothCard(
                 child: Wrap(
                   spacing: VERY_SMALL_SPACE,
                   children: <Widget>[
                     PriceUserButton(item.userId),
-                    PriceButton(
+                    PriceCountWidget(
+                      count: priceCount,
                       onPressed: () async => PriceUserButton.showUserPrices(
                         user: item.userId,
                         context: context,
-                      ),
-                      iconData: Icons.label,
-                      title: '${item.priceCount}',
-                      buttonStyle: ElevatedButton.styleFrom(
-                        foregroundColor: PriceCountWidget.getForegroundColor(
-                          item.priceCount,
-                        ),
-                        backgroundColor: PriceCountWidget.getBackgroundColor(
-                          item.priceCount,
-                        ),
                       ),
                     ),
                   ],

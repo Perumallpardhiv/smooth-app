@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
+import 'package:smooth_app/pages/preferences/lazy_counter.dart';
 import 'package:smooth_app/pages/prices/get_prices_model.dart';
 import 'package:smooth_app/pages/prices/price_button.dart';
 import 'package:smooth_app/pages/prices/prices_page.dart';
@@ -28,24 +29,16 @@ class PriceUserButton extends StatelessWidget {
         MaterialPageRoute<void>(
           builder: (BuildContext context) => PricesPage(
             GetPricesModel(
-              parameters: GetPricesParameters()
-                ..owner = user
-                ..orderBy = <OrderBy<GetPricesOrderField>>[
-                  const OrderBy<GetPricesOrderField>(
-                    field: GetPricesOrderField.created,
-                    ascending: false,
-                  ),
-                ]
-                ..pageSize = GetPricesModel.pageSize
-                ..pageNumber = 1,
-              displayOwner: false,
-              displayProduct: true,
+              parameters: GetPricesModel.getStandardPricesParameters()
+                ..owner = user,
+              displayEachOwner: false,
               uri: OpenPricesAPIClient.getUri(
-                path: 'app/users/$user',
+                path: 'users/$user',
                 uriHelper: ProductQuery.uriPricesHelper,
               ),
               title: showUserTitle(user: user, context: context),
               subtitle: user,
+              lazyCounterPrices: LazyCounterPrices(user),
             ),
           ),
         ),
@@ -55,7 +48,7 @@ class PriceUserButton extends StatelessWidget {
   Widget build(BuildContext context) => PriceButton(
         tooltip: AppLocalizations.of(context).prices_open_user_proofs(user),
         title: user,
-        iconData: Icons.account_box,
+        iconData: PriceButton.userIconData,
         onPressed: () async => showUserPrices(
           user: user,
           context: context,
